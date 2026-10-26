@@ -26,3 +26,13 @@
 .setup-step-body.no-figure:has(> .real-media){max-width:none}
 @media(max-width:600px){.media-layout,.setup-step-body:has(> .real-media){gap:18px}.media-copy>p{font-size:15px}}
 @media print{.media-layout,.setup-step-body:has(> .real-media){display:block}.media-layout>.real-media,.setup-step-body>.real-media{margin-top:20px}}
+
+/* Screenshot cards: image, concise instruction, and an unobtrusive original link. */
+.real-media[data-shot]{border-radius:10px;border-color:#e0e5ea}
+.real-media[data-shot] .real-frame{padding:8px;background:#f4f6f8}
+.real-media[data-shot] figcaption{padding:15px 17px!important;background:#fff}
+.real-caption-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin-bottom:7px}
+.real-media .real-caption-head strong{font-size:15px;line-height:1.65;margin:0;flex:1 1 200px}
+.real-caption-head>a{font-size:12px;line-height:1.8;color:#64758a;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+.real-caption-text{margin:0;font-size:14px;line-height:1.8}
+@media(max-width:600px){.real-media[data-shot] figcaption{padding:13px 14px!important}.real-media[data-shot] .real-frame{padding:6px}.real-caption-head{gap:6px 12px}}
