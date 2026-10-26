@@ -14,3 +14,15 @@
 .real-media details{padding:0;border:0}.real-media summary{cursor:pointer;color:#234f94}.real-media details img{margin-top:12px}.real-media details a{display:block}
 .setup-step-body:has(.real-media){display:block}.setup-step-body>.real-media{margin-top:24px}
 @media(max-width:600px){.real-media{margin:18px auto;border-radius:10px}.real-media .real-head{padding:12px}.real-media .real-frame{padding:8px}.real-media img,.real-media video{max-height:360px}.real-media figcaption{padding:15px!important}}
+
+/* Place the instructions beside their screenshot when both columns remain readable. */
+.media-layout,.setup-step-body:has(> .real-media){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:24px;align-items:start}
+.media-copy,.setup-step-body>div{min-width:0}
+.media-layout>.real-media,.setup-step-body>.real-media{margin:0;max-width:none}
+.media-copy>p:first-child{margin-top:0}
+.media-copy>p{font-size:16px;line-height:1.95;color:#586c7f}
+.media-copy .copy-block:first-child{margin-top:0}
+.media-copy pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+.setup-step-body.no-figure:has(> .real-media){max-width:none}
+@media(max-width:600px){.media-layout,.setup-step-body:has(> .real-media){gap:18px}.media-copy>p{font-size:15px}}
+@media print{.media-layout,.setup-step-body:has(> .real-media){display:block}.media-layout>.real-media,.setup-step-body>.real-media{margin-top:20px}}
