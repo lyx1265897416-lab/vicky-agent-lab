@@ -1,0 +1,104 @@
+[
+  {
+    "id": "study",
+    "source": "gallery/captures/study.jpg",
+    "bytesBefore": 56786,
+    "bytesAfter": 17902,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "resume",
+    "source": "gallery/captures/resume.jpg",
+    "bytesBefore": 48703,
+    "bytesAfter": 16814,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "openpost",
+    "source": "gallery/captures/openpost.jpg",
+    "bytesBefore": 70100,
+    "bytesAfter": 24000,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "ridge",
+    "source": "https://cdn.openai.com/devhub/showcase/ridge-pack/final-cb05e34c4a4b.webp",
+    "bytesBefore": 42322,
+    "bytesAfter": 20110,
+    "width": 1100,
+    "height": 688
+  },
+  {
+    "id": "presenton",
+    "source": "https://raw.githubusercontent.com/presenton/presenton/main/readme_assets/templates/Modern.png",
+    "bytesBefore": 286981,
+    "bytesAfter": 31912,
+    "width": 787,
+    "height": 584
+  },
+  {
+    "id": "product",
+    "source": "https://image.mux.com/ykdtq02zdxHNQ01GiU1ymO8uUOfNSplU015I36kSBrJ2u00/thumbnail.png?width=1200&height=675&fit_mode=smartcrop",
+    "bytesBefore": 293458,
+    "bytesAfter": 25540,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "pulse",
+    "source": "https://developers.openai.com/showcase/sites-pulse-dashboard.png",
+    "bytesBefore": 480126,
+    "bytesAfter": 40266,
+    "width": 1100,
+    "height": 696
+  },
+  {
+    "id": "wandernote",
+    "source": "https://developers.openai.com/showcase/wandernote.webp",
+    "bytesBefore": 125540,
+    "bytesAfter": 65524,
+    "width": 1100,
+    "height": 696
+  },
+  {
+    "id": "chart",
+    "source": "https://image.mux.com/k01cmFCbbbj8D201NZ01g2EwSR19vMNBIABG7vDf9NxV9Q/thumbnail.png?width=1200&height=675&fit_mode=smartcrop",
+    "bytesBefore": 77166,
+    "bytesAfter": 7998,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "webroom",
+    "source": "https://developers.openai.com/showcase/webroom/original-screenshot.webp",
+    "bytesBefore": 182816,
+    "bytesAfter": 82620,
+    "width": 1100,
+    "height": 619
+  },
+  {
+    "id": "velocity",
+    "source": "https://cdn.openai.com/devhub/showcase/velocity-loop/gameplay-poster-d38f645351be.webp",
+    "bytesBefore": 40236,
+    "bytesAfter": 27618,
+    "width": 960,
+    "height": 540
+  },
+  {
+    "id": "pattern",
+    "source": "https://cdn.openai.com/devhub/showcase/pattern-studio/final-5a0c7d96f47a.webp",
+    "bytesBefore": 199120,
+    "bytesAfter": 20940,
+    "width": 1100,
+    "height": 521
+  },
+  {
+    "id": "manim",
+    "source": "https://docs.manim.community/en/stable/SineCurveUnitCircle-1.mp4",
+    "frameSeconds": 2.5,
+    "bytesAfter": 4700
+  }
+]

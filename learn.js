@@ -34,7 +34,7 @@ if(page==='learn'){
  $('#lesson-notes').value=typeof saved['notes-'+id]==='string'?saved['notes-'+id]:'';
  $('#save-notes').addEventListener('click',()=>{saved['notes-'+id]=$('#lesson-notes').value;$('#notes-status').textContent=persist()?'已保存在本浏览器':'保存受限，请下载笔记备份';});
  $('#download-notes').addEventListener('click',()=>download(`第${id}课 ${l.title}\n\n${$('#lesson-notes').value}`,`lesson-${id}-notes.txt`));
- $('#lesson-notes').addEventListener('input',()=>{saved['notes-'+id]=$('#lesson-notes').value;$('#notes-status').textContent=persist()?'已自动保存到本浏览器':'自动保存受限，请下载笔记备份';});
+ let noteTimer;const saveNotes=()=>{saved['notes-'+id]=$('#lesson-notes').value;$('#notes-status').textContent=persist()?'已自动保存到本浏览器':'自动保存受限，请下载笔记备份';};$('#lesson-notes').addEventListener('input',()=>{clearTimeout(noteTimer);noteTimer=setTimeout(saveNotes,350)});window.addEventListener('pagehide',()=>{clearTimeout(noteTimer);saveNotes()});
  const visualDialog=document.createElement('dialog');visualDialog.className='op-dialog';visualDialog.setAttribute('aria-label','操作示意放大对照');visualDialog.innerHTML='<div class="op-dialog-bar"><b id="op-dialog-title">操作示意</b><button type="button" autofocus>关闭 ×</button></div><div class="op-dialog-content"></div>';document.body.append(visualDialog);
  let visualOpener=null;
  visualDialog.querySelector('button').addEventListener('click',()=>visualDialog.close());

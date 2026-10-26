@@ -79,3 +79,11 @@ GitHub Pages 从 `main` 分支的仓库根目录发布。提交并推送更新�
 - 六类筛选数量 3/4/2/2/1/1，总计 13，视频/动图集合为 6；展开、复制起步练习、过滤时停止动图通过。检查桌面、390px 手机宽度的首页、展厅与调研页面。
 - 修改页面的 98 个本地链接/资源存在性检查通过；修改后的 JavaScript 语法、git diff 空白检查通过。
 - 外部案例及媒体依赖原项目与网络，入口条件在每项标明。这里是视觉参考和小版本练习方向，不是这 13 个项目的完整课程复现交付；Windows 仍未实测。
+
+## Loading and playback optimization（v1.14）
+
+首页不再下载整套教材；课程与资料按需读取。13 张案例预览改为同站压缩 WebP；5 段真实演示改为点击加载的轻量无声片段，完整效果保留原作者链接。PPT 案例展示实际模板，替代不稳定的视频外链。媒体派生版本的来源分别见 `gallery/posters/sources.json` 与 `gallery/clips/sources.json`，不属于课程可转售授权。
+
+`course-content.js` 仍是课程/资料的规范来源。编辑后运行 `node tools/split-course.cjs`，再运行 `node tools/check-performance.cjs`。不要手改生成的 `course-data/` 文件。下载包的正文与内容没有更改。
+
+具体优化、实测数据与限制见 [PERFORMANCE.md](PERFORMANCE.md)。用户要求每次网页交付都检查性能，已记录在 [AGENTS.md](AGENTS.md)。本版保留了真实图像、视频与体验入口；优化没有替换成示意图。

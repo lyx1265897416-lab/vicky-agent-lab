@@ -1,0 +1,46 @@
+[
+  {
+    "id": "resume",
+    "source": "https://i.ibb.co/jzcrrt8/resume-builder-demo-optimize.gif",
+    "preview": "gallery/clips/resume.mp4",
+    "bytes": 218752,
+    "trimStart": 0,
+    "maxSeconds": 20,
+    "muted": true
+  },
+  {
+    "id": "chart",
+    "source": "https://stream.mux.com/k01cmFCbbbj8D201NZ01g2EwSR19vMNBIABG7vDf9NxV9Q.m3u8",
+    "preview": "gallery/clips/chart.mp4",
+    "bytes": 19425,
+    "trimStart": 0,
+    "maxSeconds": 20,
+    "muted": true
+  },
+  {
+    "id": "manim",
+    "source": "https://docs.manim.community/en/stable/SineCurveUnitCircle-1.mp4",
+    "preview": "gallery/clips/manim.mp4",
+    "bytes": 68040,
+    "trimStart": 0,
+    "maxSeconds": 20,
+    "muted": true
+  },
+  {
+    "id": "velocity",
+    "source": "https://cdn.openai.com/devhub/showcase/velocity-loop/five-track-gameplay-qa-3433e0ae.webm",
+    "preview": "gallery/clips/velocity.mp4",
+    "bytes": 1937850,
+    "trimStart": 0,
+    "maxSeconds": 20,
+    "muted": true
+  },
+  {
+    "id": "product",
+    "source": "https://stream.mux.com/ykdtq02zdxHNQ01GiU1ymO8uUOfNSplU015I36kSBrJ2u00.m3u8",
+    "preview": "gallery/clips/product.mp4",
+    "bytes": 350832,
+    "maxSeconds": 15,
+    "muted": true
+  }
+]
