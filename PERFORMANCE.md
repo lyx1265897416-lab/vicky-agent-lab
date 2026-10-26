@@ -2,8 +2,8 @@
 
 ## What changed
 
-- Home uses a 303-byte progress script instead of loading the 1,110,437-byte course/source bundle and lesson renderer. The hero is present in HTML and its image is preloaded.
-- Home shell (HTML + declared local JS/CSS, conservative raw-file budget): 81,885 bytes. Thirteen local WebP gallery posters total 385,944 bytes; every poster is below 100 KB. Original source URLs are retained in `gallery/posters/sources.json`.
+- Home uses a 303-byte progress script instead of loading the 1,110,437-byte course/source bundle and lesson renderer. The hero and its genuine thumbnail are present in HTML; home/gallery critical CSS is inline, and gallery cards are prerendered to avoid waiting for JavaScript and extra CSS/image round trips.
+- Home shell (HTML + declared local JS/CSS, conservative raw-file budget): 124,274 bytes (includes inline critical CSS and the genuine hero thumbnail). Thirteen local WebP gallery posters total 385,944 bytes; every poster is below 100 KB. Original source URLs are retained in `gallery/posters/sources.json`.
 - Lessons load only the catalog and selected lesson. The materials page loads the catalog plus the selected asset; full-text search is fetched only when used. All 120 original asset bodies are byte-for-byte checked against the canonical source. All eight lessons are compared after display-only image URL substitutions.
 - Course screenshots have lighter display copies in `media/previews/`; original-resolution PNG links/downloads are preserved. The shared official course-video poster is hosted locally.
 - Five genuine video previews are compressed MP4s, 19 KB–1.94 MB, requested only after clicking. These are silent excerpts, not full original videos. Full author/source links remain. Presenton's unreliable signed video URL is replaced by its actual template preview/experience link. `gallery/clips/sources.json` records media provenance.
@@ -37,3 +37,7 @@ Further media/display optimizations happened after this sample. Public-deploymen
 ## Repeat before every delivery
 
 Follow `AGENTS.md`. Generate lazy payloads after source edits; run the checks; inspect desktop/mobile and critical interactions; verify the published version. Don't infer mainland-China or mobile-network performance from this machine. GitHub Pages and external experience links remain network-dependent.
+
+## First public check and additional fix
+
+The initial v1.14 public check had LCP 5,956 ms, DOM ready 6,406 ms, CLS 0, no long tasks, no external requests, and 199,394 bytes of resource bodies. Several GitHub Pages requests took 1.8–3.2 seconds; local metrics alone were not sufficient. A second pass therefore inlined critical home/gallery CSS, embedded the 31,912-byte real hero thumbnail, prerendered gallery cards, and preloaded lesson rendering scripts. The final online result is checked after this follow-up deployment.

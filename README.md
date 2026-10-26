@@ -84,6 +84,6 @@ GitHub Pages 从 `main` 分支的仓库根目录发布。提交并推送更新�
 
 首页不再下载整套教材；课程与资料按需读取。13 张案例预览改为同站压缩 WebP；5 段真实演示改为点击加载的轻量无声片段，完整效果保留原作者链接。PPT 案例展示实际模板，替代不稳定的视频外链。媒体派生版本的来源分别见 `gallery/posters/sources.json` 与 `gallery/clips/sources.json`，不属于课程可转售授权。
 
-`course-content.js` 仍是课程/资料的规范来源。编辑后运行 `node tools/split-course.cjs`，再运行 `node tools/check-performance.cjs`。不要手改生成的 `course-data/` 文件。下载包的正文与内容没有更改。
+`course-content.js` 仍是课程/资料的规范来源。编辑后运行 `node tools/split-course.cjs`，再运行 `node tools/build-critical.cjs` 和 `node tools/check-performance.cjs`。不要手改生成的 `course-data/` 文件。下载包的正文与内容没有更改。
 
 具体优化、实测数据与限制见 [PERFORMANCE.md](PERFORMANCE.md)。用户要求每次网页交付都检查性能，已记录在 [AGENTS.md](AGENTS.md)。本版保留了真实图像、视频与体验入口；优化没有替换成示意图。

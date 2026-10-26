@@ -3,6 +3,7 @@
 The user explicitly requires checking loading speed and responsiveness before every website result is returned.
 
 - Run `node tools/split-course.cjs` after changing the canonical `course-content.js`.
+- Run `node tools/build-critical.cjs` after editing shared CSS, gallery cases, gallery renderer or the homepage hero poster.
 - Run `node tools/check-performance.cjs`, syntax-check changed scripts, and check `git diff --check` before release.
 - Use the browser to inspect the changed pages at desktop and phone widths. Verify visible images, no overflow or overlapping text, main interactions, and no new console errors.
 - For performance changes, open representative pages with `?perf=1`, read `#performance-report`, and save actual observations in `PERFORMANCE.md`. Diagnostics are opt-in and send no telemetry.
