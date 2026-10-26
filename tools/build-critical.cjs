@@ -19,5 +19,10 @@ for(const file of ['index.html','explore.html']){
   html=html.replace(/(<div[^>]*id="gallery-filters"[^>]*>)[\s\S]*?<\/div>/,(_,a)=>a+filters+'</div>');
   html=html.replace(/(<div class="gallery-grid" id="gallery-grid">)(?:<!--[\s\S]*?<!-- cards:end -->)?<\/div>/,(_,a)=>a+'<!-- cards:start -->'+box.window.GALLERY_CASES.map(render.card).join('')+'<!-- cards:end --></div>');
  }
+ html=html.replace(/<!-- startup:start -->[\s\S]*?<!-- startup:end -->/,'');
+ const scripts=['gallery/cases.js','gallery/gallery.js',...(file==='index.html'?['home.js']:[])];
+ for(const script of scripts)html=html.replace(new RegExp('<script defer src="'+script.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[^\"]*"><\/script>','g'),'');
+ const startup=scripts.map(p=>fs.readFileSync(p,'utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
+ html=html.replace('</body>','<!-- startup:start --><script>'+startup+'</script><!-- startup:end --></body>');
  fs.writeFileSync(file,html);
 }
