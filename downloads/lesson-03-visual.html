@@ -83,4 +83,4 @@ function mount(host,config,initial=0,isDialog=false,initialFallback=false){
 function scan(root=document){root.querySelectorAll('[data-real-copy]').forEach(b=>{if(b.dataset.ready)return;b.dataset.ready='1';b.addEventListener('click',async()=>{const box=b.closest('details'),status=box.querySelector('[data-real-status]');try{await navigator.clipboard.writeText(box.querySelector('pre').textContent);status.textContent='已复制'}catch{status.textContent='复制受限，请选中上方整段文字复制'}})});root.querySelectorAll('.cd-host').forEach(host=>{if(mounted.has(host))return;const data=host.querySelector('.cd-data');if(data){try{mount(host,JSON.parse(data.textContent))}catch(e){host.innerHTML='<p class="cd-noscript">演示暂时无法加载，请先使用下方图解与实操指令。</p>';console.error(e)}}})}
 window.CourseDemos={mount,scan};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>scan());else scan();
 })();
-</script></body></html>
+</script><p style="padding:24px;line-height:1.8"><a href="https://lyx1265897416-lab.github.io/vicky-agent-lab/examples.html">先看最终成果：行动看板、研究简报与工作区 ↗</a></p></body></html>
