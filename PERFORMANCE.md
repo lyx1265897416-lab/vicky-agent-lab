@@ -41,3 +41,9 @@ Follow `AGENTS.md`. Generate lazy payloads after source edits; run the checks; i
 ## First public check and additional fix
 
 The initial v1.14 public check had LCP 5,956 ms, DOM ready 6,406 ms, CLS 0, no long tasks, no external requests, and 199,394 bytes of resource bodies. Several GitHub Pages requests took 1.8–3.2 seconds; local metrics alone were not sufficient. A second pass therefore inlined critical home/gallery CSS, embedded the 31,912-byte real hero thumbnail, prerendered gallery cards, preloaded lesson rendering scripts, and inlined the small home/gallery startup scripts so initial controls need no additional script round trips. The final online result is checked after this follow-up deployment.
+
+## Final public verification
+
+Public code commit `160306a`, GitHub Pages run `40318644272` succeeded. Actual desktop-browser observation on `index.html?v=1.14&rev=160306a&perf=1`: LCP 3,708 ms, CLS 0.018, no long tasks, no third-party requests, all seven visible/nearby images loaded. DOM ready was 8,414 ms; first visibility improved, but this network/host still had document-loading delay. The final 7 subresource entries total 145,479 encoded bytes, **excluding** the HTML document (critical CSS, hero and startup JS are now inline); do not compare that number directly with the older subresource-only total as if it were total transfer size.
+
+The public OpenResume clip reached readyState 4 and the end at 15.6 s. Scrolling away left zero players. No browser console errors were observed. These are individual runs with differing cache/connection state; no guarantee of worldwide or mainland-China latency is made. Subsequent deliveries must repeat the public check rather than relying on these results.
