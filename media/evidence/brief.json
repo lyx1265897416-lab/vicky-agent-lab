@@ -1,0 +1,127 @@
+{
+  "kind": "research-brief",
+  "title": "大学生学习工具工作坊筹备简报（虚构教学案例）",
+  "source_files": [
+    "inbox/case-a/01-meeting.txt",
+    "inbox/case-a/02-budget-confirmation.txt",
+    "inbox/case-a/03-interviews.txt"
+  ],
+  "facts": [
+    {
+      "claim": "这是虚构教学案例；按资料内部日期分析，会议日期为 2026-10-26。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A01] 虚构教学资料。会议日期：2026-10-26。主题：大学生学习工具工作坊筹备。"
+        }
+      ]
+    },
+    {
+      "claim": "2026-10-27 确认最终预算上限为 1500 元，明确替代 2000 元初步预算；不是实际支出数据。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A02] 初步预算为 2000 元；预计 20 位参与者，目前没有实际付费人数数据。"
+        },
+        {
+          "source": "inbox/case-a/02-budget-confirmation.txt",
+          "quote": "[A07] 虚构教学资料。2026-10-27 预算负责人确认：最终预算上限为 1500 元，明确替代 10 月 26 日会议里的初步预算 2000 元。"
+        }
+      ]
+    },
+    {
+      "claim": "预计 20 位参与者，目前没有实际付费人数数据；报名对象仍为大学生。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A02] 初步预算为 2000 元；预计 20 位参与者，目前没有实际付费人数数据。"
+        },
+        {
+          "source": "inbox/case-a/02-budget-confirmation.txt",
+          "quote": "[A08] 报名对象仍为大学生；场地未确认，活动日期仍待定。"
+        }
+      ]
+    },
+    {
+      "claim": "讲师、场地尚未确认，活动日期待定。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A04] 讲师、场地尚未确认，活动日期待定。"
+        },
+        {
+          "source": "inbox/case-a/02-budget-confirmation.txt",
+          "quote": "[A08] 报名对象仍为大学生；场地未确认，活动日期仍待定。"
+        }
+      ]
+    },
+    {
+      "claim": "小林负责在 2026-10-30 前整理报名问题；宣传文案需要修改，但负责人和期限未分配；两项均无完成证据。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A03] 小林负责在 2026-10-30 前整理报名问题。"
+        },
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A05] 宣传文案需要修改，但还没有分配负责人和截止日期。"
+        }
+      ]
+    },
+    {
+      "claim": "小陈提议增加 10 分钟试讲，会议未决定采纳，也未指派执行人。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A06] 小陈提议增加 10 分钟试讲，会议未决定采纳，也没有指派执行人。"
+        }
+      ]
+    },
+    {
+      "claim": "访谈仅涉及三位潜在参与者，不代表全体大学生：甲希望有一页带出处的资料总结，乙反映 AI 计划太泛、难以确定先做什么，丙担忧向不熟悉的工具提供隐私。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/03-interviews.txt",
+          "quote": "[A09] 虚构教学资料。三位潜在参与者访谈，不是全体大学生调查。"
+        },
+        {
+          "source": "inbox/case-a/03-interviews.txt",
+          "quote": "[A10] 甲：我不会整理散落的学习资料，想要一页有出处的总结。"
+        },
+        {
+          "source": "inbox/case-a/03-interviews.txt",
+          "quote": "[A11] 乙：AI 写的计划经常太泛，我不知道先做什么。"
+        },
+        {
+          "source": "inbox/case-a/03-interviews.txt",
+          "quote": "[A12] 丙：我不希望将个人隐私交给不熟悉的工具。"
+        }
+      ]
+    },
+    {
+      "claim": "三位受访者未讨论愿意支付多少钱，也未确认报名。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/03-interviews.txt",
+          "quote": "[A13] 这三人没有讨论愿意支付多少钱，也没有确认报名。"
+        }
+      ]
+    }
+  ],
+  "conflicts": [],
+  "unknowns": [
+    "讲师、场地和活动日期待确认。",
+    "宣传文案修改负责人、截止日期未知；两项待办是否完成未知。",
+    "试讲提议是否采纳未知。",
+    "实际报名、实际到场及实际付费人数未知；预计 20 人不能代替实际数据。",
+    "付费意愿、可接受价格和更广泛需求未知；三人访谈不足以推断市场规模。",
+    "实际支出及预算分配未知；1500 元只是最终预算上限。"
+  ],
+  "recommendations": [
+    "建议先确认讲师、场地、活动日期及文案负责人和期限；依据是筹备信息仍待定，需相关负责人明确确认后再据此安排。",
+    "建议在最终预算上限 1500 元内拟定分配草案；依据是预算已明确更正，仍需验证报价和实际成本。",
+    "建议用一页带出处的总结、明确的第一步及隐私说明设计小规模验证；依据仅为三人访谈，需扩大样本并核实实际使用反馈，不能据此宣称普遍需求。",
+    "建议另行验证报名意向和付费意愿；依据是三人均未确认报名或讨论价格，需获得明确回答后再判断。"
+  ],
+  "ignored_source_instructions": []
+}

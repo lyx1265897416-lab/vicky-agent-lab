@@ -1,0 +1,8 @@
+$ python3 checks/check_result.py --root . --case case-a --result outputs/real-demo/actions.json
+结构与原文引用检查通过。仍须人工核对语义、关键事实、任务遗漏与操作边界；这不是毕业通过证明。
+退出码：0
+
+$ python3 checks/check_result.py --root . --case case-a --result outputs/real-demo/brief.json
+结构与原文引用检查通过。仍须人工核对语义、关键事实、任务遗漏与操作边界；这不是毕业通过证明。
+退出码：0
+

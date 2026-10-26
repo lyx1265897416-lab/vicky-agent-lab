@@ -1,0 +1,64 @@
+{
+  "kind": "meeting-actions",
+  "source_files": [
+    "inbox/case-a/01-meeting.txt",
+    "inbox/case-a/02-budget-confirmation.txt"
+  ],
+  "decisions": [
+    {
+      "text": "最终预算上限为 1500 元，明确替代会议初步预算 2000 元；不代表实际支出。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A02] 初步预算为 2000 元；预计 20 位参与者，目前没有实际付费人数数据。"
+        },
+        {
+          "source": "inbox/case-a/02-budget-confirmation.txt",
+          "quote": "[A07] 虚构教学资料。2026-10-27 预算负责人确认：最终预算上限为 1500 元，明确替代 10 月 26 日会议里的初步预算 2000 元。"
+        }
+      ]
+    },
+    {
+      "text": "报名对象仍为大学生。",
+      "evidence": [
+        {
+          "source": "inbox/case-a/02-budget-confirmation.txt",
+          "quote": "[A08] 报名对象仍为大学生；场地未确认，活动日期仍待定。"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "task": "整理报名问题",
+      "owner": "小林",
+      "deadline": "2026-10-30",
+      "status": "open",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A03] 小林负责在 2026-10-30 前整理报名问题。"
+        }
+      ]
+    },
+    {
+      "task": "修改宣传文案",
+      "owner": null,
+      "deadline": null,
+      "status": "open",
+      "evidence": [
+        {
+          "source": "inbox/case-a/01-meeting.txt",
+          "quote": "[A05] 宣传文案需要修改，但还没有分配负责人和截止日期。"
+        }
+      ]
+    }
+  ],
+  "open_questions": [
+    "宣传文案修改的负责人、截止日期待确认（01-meeting.txt [A05]）。",
+    "讲师、场地尚未确认，活动日期待定（01-meeting.txt [A04]；02-budget-confirmation.txt [A08]）。",
+    "是否采纳增加 10 分钟试讲的提议？会议尚未决定，未指派执行人，不列为任务（01-meeting.txt [A06]）。",
+    "预计 20 位参与者尚非实际人数，目前没有实际付费人数数据（01-meeting.txt [A02]）。"
+  ],
+  "ignored_source_instructions": []
+}

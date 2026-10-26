@@ -1,0 +1,78 @@
+{
+  "capture_date": "2026-10-26",
+  "source": "Native macOS Finder screenshots via Computer Use; official-download.png is a browser screenshot of https://chatgpt.com/download/.",
+  "installer": "ChatGPTInstaller.dmg, downloaded using the official download button; mounted read-only. Installer version 0.1.4. Not run or installed.",
+  "course_data": "Synthetic course materials only. Output captures show actual Codex CLI results from this session, viewed in Finder.",
+  "not_verified": [
+    "Codex desktop app internal button-by-button interactions",
+    "Windows native installation and UI"
+  ],
+  "images": [
+    {
+      "file": "actions-result.png",
+      "sha256": "71fab1cd0d221f5df55f8f42d502178f0cecb6e9832bcf92962198f3eadc3109"
+    },
+    {
+      "file": "agents-content.png",
+      "sha256": "6b708126dec84354d01ec416a7bf28c84ad37e28523e784f29e3fd35e4d595cf"
+    },
+    {
+      "file": "brief-result.png",
+      "sha256": "ca15f5dfe17bd92fd90a7b98184bf56d43829597da94e08e8736aae14e24260f"
+    },
+    {
+      "file": "checks-result.png",
+      "sha256": "6e858a3db15a9b3aa1ecd70f8fcda86ae5c28707fd1a36a15be257b505aa4702"
+    },
+    {
+      "file": "concept-worksheet.png",
+      "sha256": "376235357893d9206ca5da348b2913a98ccd3751a9bf28cb20d041a2aca88733"
+    },
+    {
+      "file": "dmg-installer.png",
+      "sha256": "a49b167ddbc01df506b0f70249eb6484ca68e988fdb1039f94c5b96d5dc0e43d"
+    },
+    {
+      "file": "finder-profile.png",
+      "sha256": "1c15f48c20f40e840c21a3ee1f5d1cabbbb8ab43e7177b7eb6b3cb286f1d5648"
+    },
+    {
+      "file": "finder-results.png",
+      "sha256": "5741a31544fbefe8ddcd13ed5e03c03f2b71c05615fbf0b09443e4360ab68c7f"
+    },
+    {
+      "file": "finder-skill.png",
+      "sha256": "785276c0f93faba5302232613f404ffb65b3d93ac0c322613e7cb657a736954c"
+    },
+    {
+      "file": "finder-workspace.png",
+      "sha256": "0ac41be051bb5c1009d35cb7cf57683494322c20fd9678fb2443ec281ca5d7e4"
+    },
+    {
+      "file": "official-download.png",
+      "sha256": "1338042c1a46d926c61e4d373d03133207923a54be4c750311e36c84b078bfa5"
+    },
+    {
+      "file": "profile-content.png",
+      "sha256": "e43221efc0ffc6d14cd5155c793fae103896128c1a7a8fa940e7b076f22c54a6"
+    },
+    {
+      "file": "research-skill.png",
+      "sha256": "ef9282ae87e03740885f906b86de40166f3de2fce5c6ada66bf043714e0f89e8"
+    },
+    {
+      "file": "skill-content.png",
+      "sha256": "36d96769a956f6b5c402d08fd8bafff46e36702726e92a97144cffd5b5a5dab1"
+    }
+  ],
+  "official_videos": [
+    {
+      "source_page": "https://learn.chatgpt.com/docs/app",
+      "url": "https://cdn.openai.com/devhub/videos-learn/proactive-teammate-v2-720p-v1.mp4"
+    },
+    {
+      "source_page": "https://learn.chatgpt.com/docs/app",
+      "url": "https://cdn.openai.com/devhub/videos-learn/draft-prds-from-slack-linear-docs-720p-v1.mp4"
+    }
+  ]
+}
