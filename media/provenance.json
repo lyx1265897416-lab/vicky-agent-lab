@@ -10,59 +10,101 @@
   "images": [
     {
       "file": "actions-result.png",
-      "sha256": "71fab1cd0d221f5df55f8f42d502178f0cecb6e9832bcf92962198f3eadc3109"
+      "sha256": "71fab1cd0d221f5df55f8f42d502178f0cecb6e9832bcf92962198f3eadc3109",
+      "width": 2078,
+      "height": 1544,
+      "mime": "image/jpeg"
     },
     {
       "file": "agents-content.png",
-      "sha256": "6b708126dec84354d01ec416a7bf28c84ad37e28523e784f29e3fd35e4d595cf"
+      "sha256": "6b708126dec84354d01ec416a7bf28c84ad37e28523e784f29e3fd35e4d595cf",
+      "width": 2078,
+      "height": 1538,
+      "mime": "image/jpeg"
     },
     {
       "file": "brief-result.png",
-      "sha256": "ca15f5dfe17bd92fd90a7b98184bf56d43829597da94e08e8736aae14e24260f"
+      "sha256": "ca15f5dfe17bd92fd90a7b98184bf56d43829597da94e08e8736aae14e24260f",
+      "width": 2078,
+      "height": 1544,
+      "mime": "image/jpeg"
     },
     {
       "file": "checks-result.png",
-      "sha256": "6e858a3db15a9b3aa1ecd70f8fcda86ae5c28707fd1a36a15be257b505aa4702"
+      "sha256": "6e858a3db15a9b3aa1ecd70f8fcda86ae5c28707fd1a36a15be257b505aa4702",
+      "width": 1632,
+      "height": 1544,
+      "mime": "image/jpeg"
     },
     {
       "file": "concept-worksheet.png",
-      "sha256": "376235357893d9206ca5da348b2913a98ccd3751a9bf28cb20d041a2aca88733"
+      "sha256": "376235357893d9206ca5da348b2913a98ccd3751a9bf28cb20d041a2aca88733",
+      "width": 1632,
+      "height": 1544,
+      "mime": "image/jpeg"
     },
     {
       "file": "dmg-installer.png",
-      "sha256": "a49b167ddbc01df506b0f70249eb6484ca68e988fdb1039f94c5b96d5dc0e43d"
+      "sha256": "a49b167ddbc01df506b0f70249eb6484ca68e988fdb1039f94c5b96d5dc0e43d",
+      "width": 1840,
+      "height": 872,
+      "mime": "image/jpeg"
     },
     {
       "file": "finder-profile.png",
-      "sha256": "1c15f48c20f40e840c21a3ee1f5d1cabbbb8ab43e7177b7eb6b3cb286f1d5648"
+      "sha256": "1c15f48c20f40e840c21a3ee1f5d1cabbbb8ab43e7177b7eb6b3cb286f1d5648",
+      "width": 1840,
+      "height": 872,
+      "mime": "image/jpeg"
     },
     {
       "file": "finder-results.png",
-      "sha256": "5741a31544fbefe8ddcd13ed5e03c03f2b71c05615fbf0b09443e4360ab68c7f"
+      "sha256": "5741a31544fbefe8ddcd13ed5e03c03f2b71c05615fbf0b09443e4360ab68c7f",
+      "width": 1840,
+      "height": 872,
+      "mime": "image/jpeg"
     },
     {
       "file": "finder-skill.png",
-      "sha256": "785276c0f93faba5302232613f404ffb65b3d93ac0c322613e7cb657a736954c"
+      "sha256": "785276c0f93faba5302232613f404ffb65b3d93ac0c322613e7cb657a736954c",
+      "width": 1840,
+      "height": 872,
+      "mime": "image/jpeg"
     },
     {
       "file": "finder-workspace.png",
-      "sha256": "0ac41be051bb5c1009d35cb7cf57683494322c20fd9678fb2443ec281ca5d7e4"
+      "sha256": "0ac41be051bb5c1009d35cb7cf57683494322c20fd9678fb2443ec281ca5d7e4",
+      "width": 1840,
+      "height": 872,
+      "mime": "image/jpeg"
     },
     {
       "file": "official-download.png",
-      "sha256": "1338042c1a46d926c61e4d373d03133207923a54be4c750311e36c84b078bfa5"
+      "sha256": "1338042c1a46d926c61e4d373d03133207923a54be4c750311e36c84b078bfa5",
+      "width": 1280,
+      "height": 720,
+      "mime": "image/jpeg"
     },
     {
       "file": "profile-content.png",
-      "sha256": "e43221efc0ffc6d14cd5155c793fae103896128c1a7a8fa940e7b076f22c54a6"
+      "sha256": "e43221efc0ffc6d14cd5155c793fae103896128c1a7a8fa940e7b076f22c54a6",
+      "width": 2078,
+      "height": 1538,
+      "mime": "image/jpeg"
     },
     {
       "file": "research-skill.png",
-      "sha256": "ef9282ae87e03740885f906b86de40166f3de2fce5c6ada66bf043714e0f89e8"
+      "sha256": "ef9282ae87e03740885f906b86de40166f3de2fce5c6ada66bf043714e0f89e8",
+      "width": 2078,
+      "height": 1544,
+      "mime": "image/jpeg"
     },
     {
       "file": "skill-content.png",
-      "sha256": "36d96769a956f6b5c402d08fd8bafff46e36702726e92a97144cffd5b5a5dab1"
+      "sha256": "36d96769a956f6b5c402d08fd8bafff46e36702726e92a97144cffd5b5a5dab1",
+      "width": 2078,
+      "height": 1538,
+      "mime": "image/jpeg"
     }
   ],
   "official_videos": [
