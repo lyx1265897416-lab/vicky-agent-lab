@@ -84,3 +84,5 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - Public practice shell remains under 83 KB uncompressed, with original 8 foundational lessons and 121 asset bodies unchanged by checker.
 - New homepage previews are small WebP crops from actual interface screenshots and retain lazy loading. Videos still load only when opened.
 - Local browser at 1365 px: LCP 88 ms, DOM ready 41 ms, load 44 ms, CLS 0, long tasks 0, external requests none. Desktop and 390 px layouts checked; online timing will be verified after Pages deployment.
+- Public Pages verification for commit f6b2ec0 (1365 × 950, current network): LCP 2920 ms, DOM ready 2956 ms, load 2963 ms, CLS 0.0239, long tasks 0. Only opt-in diagnostics requested; no external media on initial practice load. Not a mainland-China or global network measurement.
+- Public IELTS fixed exercise returned the expected correction; interview choice feedback worked at 390 px with scroll width 390 px. No new browser warnings/errors.

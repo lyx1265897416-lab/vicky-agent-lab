@@ -33,3 +33,4 @@
 - Desktop 1365 px and mobile 390 px inspected: no horizontal overflow or overlapping content, readable interaction controls. Homepage cards use actual new interface captures, with full-frame containment.
 - Existing videos are explicitly marked as the previous full-sample interface; they are not recordings of the new guided first screen.
 - Local diagnostic reload: DOM ready 41 ms, load 44 ms, LCP 88 ms, CLS 0, no long tasks or remote media. Local timing is not internet latency; public verification follows deployment.
+- Pages run 40465902666 succeeded. The public version's annotation, correct-answer check and mobile interview choice were verified; public load was ~3.0 s on the current connection, no long tasks or console errors. Actual published screenshot saved as `../practice-visual-v117.jpg`.
