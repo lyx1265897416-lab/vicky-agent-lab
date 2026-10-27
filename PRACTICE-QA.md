@@ -25,3 +25,11 @@
 先看一条真实原话如何产生可执行反馈；再换题独立完成。AI 反馈的原文引用、上下文解释和修改建议分别复核。不要把预置样例、下载量或体验次数当成学员成果或付费转化。
 
 线上验收：GitHub Pages 6f4e6d9 部署成功，公开案例页可打开；面试追问、雅思切换、正文批注可见。当前网络下最终新查询参数复测约 2.3 秒 DOM ready，CLS 0.0006，无长任务；详见 PERFORMANCE.md。视频已观察到 currentTime > 13 秒、readyState 4、无解码错误，切换后 src 清空。
+
+## v1.17 · Guided visual entry · 2026-10-27
+- First screen now contains a three-step interactive preview: IELTS annotation → before/after → fixed grammar exercise; interview question → answer selection with feedback → evidence cards.
+- Both choices, empty/wrong/correct grammar answers, case switching and the handoff into lesson 1 were exercised in the browser. No model call is implied by preset or fixed-rule results.
+- Original complete samples, lesson scripts and downloads retained. Long scripts are expandable; concrete actions remain visible.
+- Desktop 1365 px and mobile 390 px inspected: no horizontal overflow or overlapping content, readable interaction controls. Homepage cards use actual new interface captures, with full-frame containment.
+- Existing videos are explicitly marked as the previous full-sample interface; they are not recordings of the new guided first screen.
+- Local diagnostic reload: DOM ready 41 ms, load 44 ms, LCP 88 ms, CLS 0, no long tasks or remote media. Local timing is not internet latency; public verification follows deployment.

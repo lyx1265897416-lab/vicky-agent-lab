@@ -78,3 +78,9 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 
 ### 最终线上布局复测
 部署 6f4e6d9 成功后，在 1365×950 视口读取公开页面（新查询参数）：LCP 2272 ms、DOM ready 2312 ms、load 2319 ms、CLS 0.0006、长任务 0。只请求 1 个 opt-in 诊断脚本，无外域媒体请求；四轮追问按钮可用，控制台无新增错误。保留高度修复将布局偏移由 0.1356 降为 0.0006。最后仅调整了不同项目共用的反馈标题措辞，布局与加载方式不变。
+
+## v1.17 · Guided previews · 2026-10-27
+- Added CSS/DOM interactive first-screen previews; no framework, remote fonts, autoplay or extra startup requests.
+- Public practice shell remains under 83 KB uncompressed, with original 8 foundational lessons and 121 asset bodies unchanged by checker.
+- New homepage previews are small WebP crops from actual interface screenshots and retain lazy loading. Videos still load only when opened.
+- Local browser at 1365 px: LCP 88 ms, DOM ready 41 ms, load 44 ms, CLS 0, long tasks 0, external requests none. Desktop and 390 px layouts checked; online timing will be verified after Pages deployment.
