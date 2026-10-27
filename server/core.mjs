@@ -1,3 +1,4 @@
+import {createPreview} from './preview.mjs';
 import {readEvents} from './events.mjs';
 import crypto from 'node:crypto';
 export class AppError extends Error { constructor(status, message){super(message);this.status=status;} }
@@ -24,11 +25,14 @@ export function createCoach({getKey,model='deepseek-flash',fetcher=fetch,reserve
    const res=await fetcher('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${getKey()}`},signal:ctl.signal,body:JSON.stringify({model,thinking:{type:'disabled'},stream:!!onProgress,temperature:.3,max_tokens:mode==='question'?700:2600,response_format:{type:'json_object'},messages:[{role:'system',content:system},{role:'user',content:JSON.stringify(input)}]})});
    if(!res.ok){await res.body?.cancel();throw new AppError(res.status===429?429:502,res.status===429?'模型服务繁忙，请稍后重试。':res.status===401?'服务端模型凭证无效，请联系课程提供者。':res.status===402?'模型账户余额不足，请联系课程提供者。':'模型服务暂时不可用，请稍后重试。');}
    let choice;
-   if(onProgress){let content='',finish=null,last=0;await readEvents(res,packet=>{const c=packet.choices?.[0];if(!c)return;content+=c.delta?.content||'';finish=c.finish_reason||finish;if(content.length&&Date.now()-last>180){onProgress({stage:'generating',characters:content.length});last=Date.now();}});choice={message:{content},finish_reason:finish};if(!finish)throw new Error('incomplete stream');}
+   if(onProgress){let content='',finish=null,last=0;const draft=createPreview(mode);
+    const emit=()=>{const patches=draft(content);onProgress({stage:'generating',characters:content.length,previewKind:mode,patches});last=Date.now();};
+    await readEvents(res,packet=>{const c=packet.choices?.[0];if(!c)return;content+=c.delta?.content||'';finish=c.finish_reason||finish;if(content.length&&Date.now()-last>120)emit();});
+    if(content)emit();choice={message:{content},finish_reason:finish};if(!finish)throw new Error('incomplete stream');}
    else {const body=await res.json();choice=body.choices?.[0];}
    onProgress?.({stage:'checking'});
    if(choice?.finish_reason==='length')throw new AppError(502,'反馈生成不完整。你的输入已保留，请稍后重试。');
-   let result;try{result=validateResult(mode,JSON.parse(choice?.message?.content||''),source);}catch{throw new AppError(502,'模型反馈未通过格式或原文引用检查，请重试；本次不展示不可靠批注。');}
+   let result;try{result=validateResult(mode,JSON.parse(choice?.message?.content||''),source);}catch{throw new AppError(502,'模型反馈未通过格式或原文引用检查，请重试；已撤回生成预览，不保存为正式结果。');}
    return {...result,provider:'DeepSeek',model,generatedAt:new Date().toISOString()};
   }catch(e){if(e instanceof AppError)throw e;throw new AppError(504,'模型响应超时或网络中断。输入已保留；重试可能产生一次新的模型调用。');}finally{clearTimeout(timer);}
  }

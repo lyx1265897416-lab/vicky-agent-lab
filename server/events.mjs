@@ -1,4 +1,4 @@
-// Incremental SSE parser shared by provider and worker forwarding. No raw model text is exposed.
+// Incremental SSE parser shared by provider and worker forwarding. Only explicitly selected answer fields are forwarded by the caller.
 export async function readEvents(response,onEvent){
  const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='';
  const dispatch=frame=>{const data=frame.split('\n').filter(x=>x.startsWith('data:')).map(x=>x.slice(5).trimStart()).join('\n');if(data&&data!=='[DONE]')onEvent(JSON.parse(data));};
