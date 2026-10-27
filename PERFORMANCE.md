@@ -146,3 +146,4 @@ Release evidence: Worker `5a647587-c68e-47ca-8c41-6b7e5d567673`; GitHub Pages co
 - 公开作文页：TTFB 357 ms、HTML 下载 108 ms、DOM ready 524 ms、LCP 544 ms。load 3603 ms 受可选 perf-observer.js（3178 ms）影响；健康检查 4566 ms 是另一个较慢网络请求，填写表单不依赖它完成。此页实际观察视口 1280 px，不冒称手机加载数据。
 - 两页均 0 个长任务，控制台无 error/warn；未新增首屏视频或大图片。新 practice shell 79988 B（未压缩），仍低于既有 80000 B 限额。原课程 8 节、121 个资源体保持一致。
 - 390 × 844 检查了真实面试第 4 题和本地报告阅读/练习；无水平溢出。桌面检查了当前题、历史折叠、复盘与重开确认。并未做中国大陆或全网络延迟验证。
+- 最终发布版重新冷打开（尚未操作表单）：LCP 472 ms、DOM ready 468 ms、load 470 ms、TTFB 341 ms、HTML transfer 27587 B、health 1032 ms、CLS 0.0087、0 长任务。独立核验了余额 0 时提交按钮禁用、表单仍可填写、可手动检查额度；390 px 无横向溢出。以上均为当前网络单次观察。

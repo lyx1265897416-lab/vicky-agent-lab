@@ -10,7 +10,7 @@ let progress={stage:'connecting',characters:0},startedAt=0,progressTimer,draftFi
 let remaining=null,resetPending=false;
 let accepted=false,trialCode='',serviceNote=api?'正在连接服务…':'';
 function canStart(){return ready&&(remaining===null||remaining>=(kind==='ielts'?1:5));}
-function serviceText(){return !ready?serviceNote:remaining===null?'DeepSeek 已连接 · 提交后开始分析':remaining===0?'今日体验已用完。请先下载材料或体验完整样例；额度按 UTC 零点恢复。':kind==='interview'&&!states.interview.session&&remaining<5?'今日额度不足完整四轮面试。可先看完整样例。':'DeepSeek 已连接 · 全站今日剩余 '+remaining+' 次调用（多人共享，不保证预留）';}
+function serviceText(){return !ready?serviceNote:remaining===null?'DeepSeek 已连接 · 提交后开始分析':remaining===0?'今日体验已用完。请先下载材料或体验完整样例；每日北京时间 08:00 恢复。':kind==='interview'&&!states.interview.session&&remaining<5?'今日额度不足完整四轮面试。可先看完整样例。':'DeepSeek 已连接 · 全站今日剩余 '+remaining+' 次调用（多人共享，不保证预留）';}
 function stage(){const s=states[kind],i=kind==='ielts';
  $('#live-title').textContent=i?'雅思写作批改':'AIGC 岗位面试陪练';
  $('#live-description').textContent=i?'填题目与原稿 → 看批注 → 自己改一处。反馈不会直接替你重写整篇。':'填项目 → 回答 4 道问题 → 自动生成复盘。一次只回答当前问题，不需要自己想下一题。';
