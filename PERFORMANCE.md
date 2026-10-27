@@ -100,3 +100,9 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - check-performance / check-practice 通过，原 8 节基础课和 121 个材料正文不变。
 - Cloudflare 部署与真实模型延迟待账号授权、密钥配置后补测。
 - 对应公开版本 233c01a，GitHub Pages run 40478535835 成功。公开实践页实测 LCP 3620 ms、DOM ready 4214 ms、load 4373 ms、CLS 0.0486、long tasks 0，无初始远程媒体/模型请求。本次公网较慢；独立 curl 为 HTTP 200、TTFB 10.795 s、总 13.898 s（98,693 B），显示网络等待存在明显波动。未声称全球或大陆速度已达标。
+
+### 2026-10-27 真实 AI 上线复测
+- 公开写作页：LCP 6148 ms、DOMContentLoaded 7402 ms、load 7444 ms、CLS 0.0486、long tasks 0。health 请求 6102 ms；当前网络波动显著。
+- 公开面试页：LCP 2236 ms、DOMContentLoaded 4794 ms、load 4796 ms、CLS 0.0154、long tasks 0；health 2015 ms。
+- 新增后台 health 请求不调用模型，提交前无媒体自动加载；静态实践页面 98,826 B，原 8 课与 121 资产正文保持一致。
+- 两页均可真实提交，不存在渲染卡死；不能将 4.8–7.4 秒的本次加载时间说成全球或国内稳定。网页与 health 受外部网络影响，仍保留超时与明确错误提示。
