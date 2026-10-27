@@ -92,3 +92,10 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - Frontend sends model requests only after explicit submit and transfer consent. Missing backend/credentials never triggers provider requests or displays fabricated AI output.
 - Existing foundational lesson/asset checks remain passing. Public timings will be recorded after deployment.
 - Public v1.18 (commit 5685f3c), current connection: LCP 1612 ms, DOM ready 1630 ms, load 1740 ms, CLS 0.0087, long tasks 0. No initial external media/model requests; opt-in diagnostics only. No console warnings/errors. This is not a mainland-China/global latency claim.
+
+### 2026-10-27 Cloudflare 接入准备
+- 仅增加云端数据处理说明，未增加前端依赖或首屏远程媒体。
+- 127.0.0.1:8095/practice.html?case=ielts&perf=1：DOM ready 599 ms、load 603 ms、LCP 568 ms、CLS 0.0486、long tasks 0（本地当前网络，不代表公网或中国大陆）。
+- 390 px / 1365 px：document scrollWidth 等于 viewport；手机表单与完整同意说明可读，无控制台错误。
+- check-performance / check-practice 通过，原 8 节基础课和 121 个材料正文不变。
+- Cloudflare 部署与真实模型延迟待账号授权、密钥配置后补测。

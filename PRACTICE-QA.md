@@ -44,3 +44,8 @@
 - Local HTTP checks: private env/source paths 404; unapproved Origin 403; absent data-transfer consent 400. No actual secret was entered during QA.
 - Deployment requires a HTTPS Node backend with persistent usage storage and one instance; operational instructions in server/README.md. No account, payment or hosting purchase was made.
 - Pages deployment 40471096760 succeeded. Public real-input tab accurately reports no deployed backend, with submit disabled; no model output is implied. Desktop and 390 px input layouts checked without horizontal overflow. Public shell loaded in 1.74 s on the current connection.
+
+## Cloudflare 免费档接入准备 · 2026-10-27
+- server/core.test.mjs + cloud/worker.test.mjs：10 项通过（模拟上游）；新增并发全站限额、跨实例会话恢复、成功重试去重、过期清理、非法来源/超长输入校验。
+- Wrangler 4.153.0 dry-run 成功，压缩 Worker 6.35 KiB；本机 workerd 启动成功，未配置密钥 health.ready=false。
+- 尚未使用真实 DeepSeek 密钥，未完成云端发布。不要将模拟验证等同模型效果。

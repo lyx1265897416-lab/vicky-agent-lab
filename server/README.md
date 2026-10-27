@@ -3,7 +3,11 @@
 Node.js 22+，无第三方依赖。启动：`node server/main.mjs`。
 本地打开 http://127.0.0.1:8095/local-setup，填写现有密钥。默认保存到仓库外相邻的 `vicky-agent-lab-private/deepseek.env`（600 权限）。不要在公开仓库里写密钥。
 
-## 部署条件
+## 推荐的云端部署
+
+小规模公开体验使用 [Cloudflare 免费档部署说明](../cloud/README.md)。云端版已改用持久化的全站额度和短期面试会话；下面的持久磁盘条件只适用于原生 Node 服务。
+
+## Node 部署条件
 - 长期运行的 Node 服务（单实例），支持 HTTPS、外连 api.deepseek.com 和一个**持久磁盘**。
 - `NODE_ENV=production`、`DEEPSEEK_API_KEY`（secret）、`PRIVATE_DIR`（持久磁盘目录）。
 - `DEEPSEEK_MODEL=deepseek-flash`（2026-10-27 官方文档模型标识，可由运营方调整）。
