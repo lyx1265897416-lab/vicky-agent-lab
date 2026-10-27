@@ -99,3 +99,4 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - 390 px / 1365 px：document scrollWidth 等于 viewport；手机表单与完整同意说明可读，无控制台错误。
 - check-performance / check-practice 通过，原 8 节基础课和 121 个材料正文不变。
 - Cloudflare 部署与真实模型延迟待账号授权、密钥配置后补测。
+- 对应公开版本 233c01a，GitHub Pages run 40478535835 成功。公开实践页实测 LCP 3620 ms、DOM ready 4214 ms、load 4373 ms、CLS 0.0486、long tasks 0，无初始远程媒体/模型请求。本次公网较慢；独立 curl 为 HTTP 200、TTFB 10.795 s、总 13.898 s（98,693 B），显示网络等待存在明显波动。未声称全球或大陆速度已达标。
