@@ -86,3 +86,8 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - Local browser at 1365 px: LCP 88 ms, DOM ready 41 ms, load 44 ms, CLS 0, long tasks 0, external requests none. Desktop and 390 px layouts checked; online timing will be verified after Pages deployment.
 - Public Pages verification for commit f6b2ec0 (1365 × 950, current network): LCP 2920 ms, DOM ready 2956 ms, load 2963 ms, CLS 0.0239, long tasks 0. Only opt-in diagnostics requested; no external media on initial practice load. Not a mainland-China or global network measurement.
 - Public IELTS fixed exercise returned the expected correction; interview choice feedback worked at 390 px with scroll width 390 px. No new browser warnings/errors.
+
+## v1.18 · Input-ready interface · 2026-10-27
+- Practice shell stays below 100 KB uncompressed; no SDK, framework, third-party font or eager media added. Hosted API remains unset until deployment and live verification.
+- Frontend sends model requests only after explicit submit and transfer consent. Missing backend/credentials never triggers provider requests or displays fabricated AI output.
+- Existing foundational lesson/asset checks remain passing. Public timings will be recorded after deployment.

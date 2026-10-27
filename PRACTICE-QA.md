@@ -34,3 +34,12 @@
 - Existing videos are explicitly marked as the previous full-sample interface; they are not recordings of the new guided first screen.
 - Local diagnostic reload: DOM ready 41 ms, load 44 ms, LCP 88 ms, CLS 0, no long tasks or remote media. Local timing is not internet latency; public verification follows deployment.
 - Pages run 40465902666 succeeded. The public version's annotation, correct-answer check and mobile interview choice were verified; public load was ~3.0 s on the current connection, no long tasks or console errors. Actual published screenshot saved as `../practice-visual-v117.jpg`.
+
+## v1.18 · DeepSeek integration preparation · 2026-10-27
+- Backend added: actual DeepSeek chat-completions adapter, JSON/quote validation, four-turn in-memory interview sessions, successful-response idempotency, safe errors, input bounds, global persisted daily call cap and loopback-only key setup.
+- Browser workflow tested against an explicitly labelled local fixture, not a real model: essay submit → quote/revision → four interview replies → summary. Six backend tests pass; fixture exists outside the public repo and is not deployed.
+- Unconfigured real server correctly returns ready=false; UI disables submission and never substitutes canned feedback. No key has been supplied and **no real DeepSeek generation has been tested**.
+- Public GitHub Pages has no backend configured. Its real-input tab states that the service is not open. Existing preset walkthrough and course downloads remain available.
+- Prominent Chinese case titles now appear in the cover image area and actual preview capture. Test outputs are not used as marketing screenshots.
+- Local HTTP checks: private env/source paths 404; unapproved Origin 403; absent data-transfer consent 400. No actual secret was entered during QA.
+- Deployment requires a HTTPS Node backend with persistent usage storage and one instance; operational instructions in server/README.md. No account, payment or hosting purchase was made.

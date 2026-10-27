@@ -10,17 +10,17 @@ for(const skill of ['aigc-interview-coach','ielts-writing-coach'])fs.copyFileSyn
 const base='https://lyx1265897416-lab.github.io/vicky-agent-lab/';
 const template=fs.readFileSync('tools/practice-page.html','utf8');
 let online=template.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+fs.readFileSync('practice/app.css','utf8')+'</style>');
-for(const f of ['content','report-format','app'])online=online.replace(new RegExp('<script defer src="practice/'+f+'.js[^\\"]*"><\\/script>'),'');
-const startup=['content','report-format','app'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
+for(const f of ['content','report-format','app','live'])online=online.replace(new RegExp('<script defer src="practice/'+f+'.js[^\\"]*"><\\/script>'),'');
+const startup=['content','report-format','app','live'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
 online=online.replace('</body>','<script>'+startup+'</script></body>');fs.writeFileSync('practice.html',online);
 let html=template;
 html=html.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+fs.readFileSync('practice/app.css','utf8')+'</style>');
-for(const f of ['content','report-format','app'])html=html.replace(new RegExp('<script defer src="practice/'+f+'.js[^\"]*"><\/script>'),'<script defer src="practice/'+f+'.js"></script>');
+for(const f of ['content','report-format','app','live'])html=html.replace(new RegExp('<script defer src="practice/'+f+'.js[^\"]*"><\/script>'),'<script defer src="practice/'+f+'.js"></script>');
 html=html.replace(/<script>if\(new URLSearchParams[\s\S]*?<\/script>/,'');
 html=html.replace(/href="(index.html|explore.html|setup.html|learn.html\?lesson=1)"/g,(_,p)=>'href="'+base+p+'"').replaceAll('href="downloads/practice-workspace/','href="').replaceAll('href="downloads/practical-','href="'+base+'downloads/practical-');
 fs.writeFileSync(path.join(w,'report-viewer.html'),html);
 fs.mkdirSync(path.join(w,'practice/media'),{recursive:true});
-for(const f of ['content.js','report-format.js','app.js'])fs.writeFileSync(path.join(w,'practice',f),fs.readFileSync('practice/'+f,'utf8').replaceAll('downloads/practice-workspace/','').replaceAll('href="downloads/practical-','href="'+base+'downloads/practical-'));
+for(const f of ['content.js','report-format.js','app.js','live.js'])fs.writeFileSync(path.join(w,'practice',f),fs.readFileSync('practice/'+f,'utf8').replaceAll('downloads/practice-workspace/','').replaceAll('href="downloads/practical-','href="'+base+'downloads/practical-'));
 for(const f of fs.readdirSync('practice/media'))if(/\.(webp|mp4)$/.test(f))fs.copyFileSync('practice/media/'+f,path.join(w,'practice/media',f));
 cp.execFileSync('python3',['-c',`from pathlib import Path
 from zipfile import ZipFile,ZIP_DEFLATED,ZipInfo

@@ -7,3 +7,6 @@ interview.mp4 / ielts.mp4：上述实际操作截图按顺序组成的分步视�
 
 ## v1.17 interactive preview captures
 `interview-preview.webp` and `ielts-preview.webp` are cropped actual browser screenshots of the local v1.17 course interface, captured 2026-10-27. No generated UI imagery. Existing MP4s show the earlier full-sample interface; their disclosure is updated on-page.
+
+## v1.18
+Preview captures refreshed from the actual local course interface with prominent Chinese case titles. These images still depict the preset walkthrough; they are not live DeepSeek outputs.

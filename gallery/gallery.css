@@ -11,3 +11,4 @@
 
 /* Actual interactive-preview captures: preserve the whole exercise window. */
 .practice-feature-grid img{height:auto;aspect-ratio:712/538;object-fit:contain;padding:14px;background:#edf2fc}.practice-feature-grid article>a{display:block;background:#edf2fc}.practice-feature-copy p{font-size:14px;line-height:1.8}@media(max-width:700px){.practice-feature-grid img{height:auto}}
+.case-cover{position:relative;text-decoration:none}.case-cover-label{padding:24px 24px 4px;color:#173d6b}.case-cover-label b{display:block;font-size:clamp(22px,2.3vw,31px);line-height:1.4}.case-cover-label span{display:block;font-size:13px;color:#526e94;margin-top:8px}.case-cover-label+img{padding-top:14px}@media(max-width:700px){.case-cover-label{padding:20px 20px 0}.case-cover-label b{font-size:24px}}
