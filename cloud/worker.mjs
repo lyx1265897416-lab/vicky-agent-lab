@@ -36,7 +36,7 @@ export default {
   const cors=r=>{const h=new Headers(r.headers);if(allowed){h.set('Access-Control-Allow-Origin',origin);h.set('Vary','Origin');h.set('Access-Control-Allow-Methods','GET, POST, OPTIONS');h.set('Access-Control-Allow-Headers','Content-Type, X-Trial-Code');}return new Response(r.body,{status:r.status,headers:h});};
   try{
    const path=new URL(request.url).pathname;
-   if(request.method==='GET'&&path==='/api/health')return cors(json({ready:enabled(env),provider:'DeepSeek',requiresCode:!!env.TRIAL_ACCESS_CODE}));
+   if(request.method==='GET'&&path==='/api/health'){const budget=enabled(env)?await internal(env.BUDGET.getByName('global'),'/status',{}):{};return cors(json({ready:enabled(env),provider:'DeepSeek',requiresCode:!!env.TRIAL_ACCESS_CODE,...budget}));}
    if(!allowed)throw new AppError(403,'请从课程网页打开体验。');
    if(request.method==='OPTIONS')return cors(new Response(null,{status:204}));
    if(request.method!=='POST')throw new AppError(405,'Method not allowed');
@@ -65,6 +65,7 @@ export class TrialBudget {
  constructor(ctx,env){this.ctx=ctx;this.env=env;}
  async fetch(request){try{
   const {ip}=await request.json(),now=Date.now(),day=new Date(now).toISOString().slice(0,10),cap=limit(this.env);
+  if(new URL(request.url).pathname==='/status'){const state=await this.ctx.storage.get('usage');return json({remaining:Math.max(0,cap-(state?.day===day?state.count:0)),resetsAt:new Date(day+'T00:00:00Z').getTime()+86400000});}
   await this.ctx.storage.transaction(async tx=>{
    const old=await tx.get('usage'),state=old?.day===day?old:{day,count:0,ips:{}};
    if(state.count>=cap)throw new AppError(429,'今天的全站体验额度已用完，请明天再试。');

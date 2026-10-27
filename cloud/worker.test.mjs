@@ -56,3 +56,13 @@ test('streaming interview forwards progress and persists before final external s
  const packets=[];const {readEvents}=await import('../server/events.mjs');await readEvents(response,p=>packets.push(p));assert(packets.some(p=>p.stage==='generating'));const result=packets.at(-1);assert.equal(result.type,'result');assert.match(result.data.session,/^\w{48}$/);assert(await contexts.get(result.data.session).storage.get('session'));
  }finally{globalThis.fetch=old;}
 });
+
+test('health reads shared remaining budget without consuming a call, including after reset',async()=>{
+ const ctx=context(),b=new TrialBudget(ctx,base),env={...base,BUDGET:{getByName:()=>({fetch:(u,i)=>b.fetch(new Request(u,i))})}};
+ const health=async()=>await (await worker.fetch(new Request('https://x/api/health'),env)).json();
+ assert.equal((await health()).remaining,30);assert.equal(await ctx.storage.get('usage'),undefined);
+ await ctx.storage.put('usage',{day:new Date().toISOString().slice(0,10),count:30,ips:{}});
+ assert.equal((await health()).remaining,0);assert.equal((await health()).ready,true);
+ assert.equal((await ctx.storage.get('usage')).count,30);
+ await ctx.storage.put('usage',{day:'2000-01-01',count:30,ips:{}});assert.equal((await health()).remaining,30);
+});
