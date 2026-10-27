@@ -91,3 +91,4 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - Practice shell stays below 100 KB uncompressed; no SDK, framework, third-party font or eager media added. Hosted API remains unset until deployment and live verification.
 - Frontend sends model requests only after explicit submit and transfer consent. Missing backend/credentials never triggers provider requests or displays fabricated AI output.
 - Existing foundational lesson/asset checks remain passing. Public timings will be recorded after deployment.
+- Public v1.18 (commit 5685f3c), current connection: LCP 1612 ms, DOM ready 1630 ms, load 1740 ms, CLS 0.0087, long tasks 0. No initial external media/model requests; opt-in diagnostics only. No console warnings/errors. This is not a mainland-China/global latency claim.

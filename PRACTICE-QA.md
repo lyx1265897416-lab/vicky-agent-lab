@@ -43,3 +43,4 @@
 - Prominent Chinese case titles now appear in the cover image area and actual preview capture. Test outputs are not used as marketing screenshots.
 - Local HTTP checks: private env/source paths 404; unapproved Origin 403; absent data-transfer consent 400. No actual secret was entered during QA.
 - Deployment requires a HTTPS Node backend with persistent usage storage and one instance; operational instructions in server/README.md. No account, payment or hosting purchase was made.
+- Pages deployment 40471096760 succeeded. Public real-input tab accurately reports no deployed backend, with submit disabled; no model output is implied. Desktop and 390 px input layouts checked without horizontal overflow. Public shell loaded in 1.74 s on the current connection.
