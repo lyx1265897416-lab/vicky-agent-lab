@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "kind": "ielts",
+  "title": "议论文｜论证、语法与立场 · 预置样例报告",
+  "source": "Some people believe university students should be required to do community volunteering. I agree that volunteering can be useful, but I do not think it should be compulsory for every student. Universities should make these activities easy to join and give students choices about when to participate.\n\nVolunteering is good for students because it has many benefits. Students meet people outside their courses and learn to work with others. For example, helping at a local reading club could give a student experience of explaining an idea to a child. They must listen carefully and change their explanation when the child does not understand. This is a useful skill in group projects and later at work.\n\nHowever, a compulsory programme can create difficulties. Some students has paid jobs after class. They depend on that income to cover rent or transport. Adding several hours of unpaid work every week may leave them with less time for study or rest. A university should not assume that every student has the same amount of free time. Flexible weekend activities or short projects during holidays would be easier for many students to attend.\n\nThere is also a practical question about the organisations receiving help. A charity may need people who return regularly and understand its work. Sending students who only want to finish a requirement may not meet that need. Universities could instead match interested students with organisations and explain the responsibilities before they begin.\n\nIn conclusion, volunteering can help students and local communities. It should therefore be required for all students. Universities should also provide flexible opportunities and information so that students can make informed choices.",
+  "summary": "人工整理的教学反馈；不是网页实时 AI 输出。",
+  "evidence": [
+    {
+      "quote": "Volunteering is good for students because it has many benefits.",
+      "issue": "这一主题句重复“有益”，没有点明具体收益；后文的沟通例子可以帮助它更具体。",
+      "action": "把主题句改为概括沟通能力的观点，保留自己的论证。",
+      "status": "需要补充"
+    },
+    {
+      "quote": "Some students has paid jobs after class.",
+      "issue": "明确语法问题：复数主语 students 与 has 不一致。",
+      "action": "使用 have，并检查文中其他主谓搭配。",
+      "status": "需要补充"
+    },
+    {
+      "quote": "It should therefore be required for all students.",
+      "issue": "结论支持强制参与，与开头反对全面强制的立场冲突。",
+      "action": "先确认你真正支持的立场，再使结论与主体一致。",
+      "status": "需要补充"
+    }
+  ],
+  "nextPractice": "换一道有关“大学生兼职”的题，先写立场和两句主题句，检查结论是否回应同一个立场。",
+  "disclaimer": "教学原型 · 待雅思教师复核 · 不估分"
+}

@@ -57,3 +57,14 @@ The public OpenResume clip reached readyState 4 and the end at 15.6 s. Scrolling
 - No new-account creation, phone verification, mainland-network or Windows native app test is claimed.
 
 Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setup.html?v=1.15&perf=1#registration reported LCP 1,644 ms, CLS 0, 0 long tasks, DOM ready 1,631 ms, load 1,762 ms; 9 subresource requests, 104,138 encoded bytes excluding HTML, 0 external resources. No console errors. Mainland detail auto-expanded and the Windows login deep link selected the correct platform. These observations apply only to this browser/network run, not mainland-China availability or universal speed.
+
+## 2026-10-27 · v1.16 实操案例
+
+- 新页面 shell（HTML + CSS + 3 JS）64,777 bytes，无第三方字体或脚本；首次不设置视频源。
+- 首页 shell 126,653 bytes，既有 121 份材料和 8 课载荷一致性检查 PASS。
+- 两段 H.264 分步视频各约 2.16 MB，preload=none，展开后才设置源；切换栏目、隐藏页面释放媒体，离开播放区域停止并释放。
+- 390 px 与 1365 px 布局检查：document.scrollWidth 等于 viewport width，无横向溢出。
+- 本机 localhost explore 实测：LCP 1356 ms、CLS 0、长任务 0、DOM ready 198 ms、load 250 ms；外部资源请求 0。图片按需加载，未加载的下方 lazy 图片不是破图。
+- 两种 JSON 报告实际导入成功；样例切换、四轮追问、修改对照、课程切换和下载检查通过。浏览器未发现新增错误。
+- 离线 file:// 交互实测受到浏览器安全策略限制，未绕过；ZIP 和相对资源只做静态完整性检查。
+- 线上发布后的观测见后续记录；本机数据不能代表中国大陆或其他网络。

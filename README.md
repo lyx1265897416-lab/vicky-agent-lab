@@ -91,3 +91,13 @@ GitHub Pages 从 `main` 分支的仓库根目录发布。提交并推送更新�
 ### v1.15 — 账号注册与中国大陆可用性
 
 安装页增加共享注册教程，在两条系统路线的登录前加入 02A 入口。包含地区判断、五步注册、手机验证真实官方截图、六类排错与账号/Codex/文件操作三层验收。来源与验证边界见 `REGISTRATION-RESEARCH.md`。注册清单在资料页与所有课程包中同步提供；原有步骤锚点保持可用。大陆网络、新账号注册与 Windows 原生流程未实测。
+
+## v1.16 · 两个完整实操案例
+
+入口 `practice.html?case=interview` 与 `practice.html?case=ielts`，首页 / 实操案例 / 资料页均有入口。
+- 2 个项目级 Skills、8 节文字实操、6 组原创输入、20 道面试问题。
+- 预置反馈可交互体验；个人草稿导出、JSON 报告本地导入与原文引用匹配校验。
+- 两段真实网页截图组成的分步视频，按需加载；不是连续录屏或 Codex 模型执行录像。
+- `node tools/build-practice.cjs` 同步讲稿、离线查看器和两个 ZIP；`node tools/check-practice.cjs` 验证材料、报告边界及体积。
+- 下载 `downloads/practical-cases-v1.zip`，选择 `practice-workspace` 为本地目录；不包含模型账户或额度。
+- 预置样例不是实际学员成果。雅思待教师复核，不估分。独立模型多轮行为测试、真实用户试用与付款验证未完成。详见 `PRACTICE-QA.md`。
