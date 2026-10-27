@@ -154,3 +154,28 @@ Release evidence: Worker `5a647587-c68e-47ca-8c41-6b7e5d567673`; GitHub Pages co
 - 本次首开仍约 5.4 秒，主要等待 HTML 响应；与之前较快的观测有明显网络差异，不能宣称稳定秒开。无新增首屏视频或模型请求。
 - 同一篇 270 词作文真实生成 4.7 秒；报告定位、改写、下载和切换保留均验证。手机视口与 scrollWidth 均 390 px，桌面/手机控制台无错误或警告。
 - 本轮未改变网站代码，只补充真实验收证据；check-performance、check-practice、live.js 语法与 diff 检查通过。
+
+
+## 2026-10-27 · v1.22 缓存、直达入口与首开边界
+
+- 增加免费 Workers Static Assets 入口 https://vicky-agent-lab-api.vicky-agent-lab-api.workers.dev/ ，页面与 /api 同源，减少额外域名连接和 JSON POST 预检。原 GitHub 地址保留，并提供随案例切换的备用入口，不自动把访客重定向到未验证更快的线路。
+- 首页与展厅 CSS/JS 压缩；首页 HTML 122607 B（之前 126046 B，旧检查值 127807 B 包含诊断脚本）。实践页 81247 B（含约 1 KB 导航缓存启动代码与备用链接），检查预算设为 83000 B。没有删教材、视频或可视化。
+- 新 navigation-sw.js 只缓存 index/explore/practice 三个公开 HTML 页面。再次访问先显示缓存，后台更新供下次导航使用，不刷新正在填写的表单。指针/键盘焦点/触屏意图只预取对应公开页面；从不预取 AI、课程全集或视频，不缓存用户输入、API、报告和下载。此项改善回访和站内切换，不等于新用户首次访问提速。
+- 可选诊断脚本在实践页 load 后加载，避免诊断本身拖慢 load 指标；只带 perf=1 时启用。页面正常链接不带诊断参数。
+
+本机同一网络的单次观察（不是中国大陆实测，也不是控制变量统计）：
+
+| 页面/阶段 | 首屏 LCP | HTML TTFB | DOM ready | load | health | 长任务 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 原 GitHub，优化前新导航 | 3612ms | 1339ms | 3596ms | 3604ms | 5518ms | 0 |
+| Cloudflare 新域名首次访问 | 8852ms | 7314ms | 8837ms | 9624ms | 1266ms | 0 |
+| 新版 Cloudflare，无本机页面缓存，但域名已访问 | 2000ms | 451ms | 1974ms | 2880ms | 1724ms | 0 |
+| 同入口再次打开，命中本机页面缓存 | 140ms | 4ms | 49ms | 2512ms* | 2487ms | 0 |
+
+* 此次诊断脚本另等 2492ms，HTML transfer 为 0，servedByServiceWorker=true。之后已将实践页诊断加载移到 load 之后。新域名首次 8.9 秒失败于速度目标的记录保留；不能仅选 2 秒观测来宣称首开稳定。接口仍需联网，页面可先填写但余额返回前不可提交。
+
+- 390px 手机与桌面 UI 检查：无横向溢出、无 error/warn；案例切换、按需打开 4 节实战课首课成功。原 8 节基础课、121 个材料正文未变。19 个后端/流式/预算测试和 4 个导航缓存边界测试通过。
+- 本轮未调用付费模型，也未提高每日 30 次上限。新同源接口不自动重试付费请求。
+- 尝试 ITDOG 国内多线路测速；用户授权本次滑块验证，但验证未通过，没有获取国内节点数据。用户暂无域名，因此未开通自有域名、付费托管或中国大陆 CDN。
+- 官方说明：https://developers.cloudflare.com/china-network/ ：大陆网络是 Enterprise 的另订服务，默认免费网络不能据此宣称大陆加速。静态缓存依据 https://developers.cloudflare.com/workers/static-assets/ 。
+- 最终 Worker 版本 f12ef0c2-c6e8-4f29-9f45-6d412a5b1a30。公共课程按允许清单上传，server/cloud/env/Git 元数据不进入静态目录。

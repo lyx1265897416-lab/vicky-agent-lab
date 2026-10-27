@@ -6,7 +6,7 @@ function loadContent(){if(window.PRACTICE_CONTENT)return Promise.resolve();if(co
 let kind=new URLSearchParams(location.search).get('case')==='ielts'?'ielts':'interview',sample=0,step=0,lesson=0,currentTab='demo';
 const drafts={interview:'',ielts:''},reports={interview:null,ielts:null};
 const course=()=>data[kind],current=()=>course().cases[sample];
-function url(){const u=new URL(location.href);u.searchParams.set('case',kind);u.hash=currentTab==='demo'?'demo':currentTab;history.replaceState(null,'',u);}
+function url(){const alternate=$('#alternate-entry');if(alternate)alternate.href='https://vicky-agent-lab-api.vicky-agent-lab-api.workers.dev/practice.html?case='+kind+'#live';const u=new URL(location.href);u.searchParams.set('case',kind);u.hash=currentTab==='demo'?'demo':currentTab;history.replaceState(null,'',u);}
 function save(name,content,type='text/plain;charset=utf-8'){const u=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
 async function copy(text,target){try{await navigator.clipboard.writeText(text);target.textContent='已复制。切换到 Codex 的本地任务输入框发送。'}catch{target.textContent='浏览器未允许复制，请手动选中上方指令复制。';}}
 let previewStep=0,previewChoice='',previewDraft='';

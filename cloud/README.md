@@ -68,3 +68,16 @@ npm run dev
 - https://developers.cloudflare.com/durable-objects/platform/pricing/
 - https://developers.cloudflare.com/workers/configuration/secrets/
 - https://api-docs.deepseek.com/
+
+
+## 静态入口（v1.22）
+同一个 Worker 同时发布公开课程与 `/api/*`。静态文件通过 Workers Static Assets 直接分发，不调用模型或额度计数器；新入口网页请求 API 为同源请求，GitHub Pages 的既有 Origin 继续有效。
+
+运行 `npm run deploy --prefix cloud` 时，predeploy 自动执行 `tools/build-edge.cjs`，从已跟踪文件中只复制页面和公开素材到忽略目录 `cloud/public/`。不复制 server、cloud、环境文件或 Git 元数据。新增公开文件应先加入 Git 跟踪再部署。发布前先运行相应页面构建和检查。
+
+缓存：HTML/JS/CSS 重新验证，带内容哈希的课程资源可长期缓存，预览图缓存一天。接口反馈与额度始终 no-store；不缓存作文、问答或 AI 结果。保留每日 30 次模型调用上限。
+
+免费 Cloudflare 默认网络不等于中国大陆节点。没有自有域名和备案，本版本只能作为免费备用入口，不保证国内线路速度或可达性。国内部署需另行选定域名、托管和适用备案流程，不在此自动开通付费服务。
+
+
+导航缓存只存公开三页 HTML，重新打开可立即显示，后台更新供下次导航使用；不会自动刷新学员正在输入的页面。修改缓存策略时升级 navigation-sw.js 的 VERSION。要验证完全首次访问，请使用没有本站缓存的浏览器环境；加 query 参数不会绕过这个公开页面缓存。诊断通过 servedByServiceWorker 和 HTML transfer 区分命中，不能将命中数据称为首开。

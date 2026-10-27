@@ -66,3 +66,14 @@ test('health reads shared remaining budget without consuming a call, including a
  assert.equal((await ctx.storage.get('usage')).count,30);
  await ctx.storage.put('usage',{day:'2000-01-01',count:30,ips:{}});assert.equal((await health()).remaining,30);
 });
+
+test('edge course serves static files without budget access and rejects other API origins',async()=>{
+ let served=0;const env={...base,ASSETS:{fetch:async r=>{served++;return new Response('course');}}};
+ const asset=await worker.fetch(new Request('https://example.test/practice.html'),env);
+ assert.equal(await asset.text(),'course');assert.equal(served,1);
+ assert.equal((await worker.fetch(req('/api/review',{},'https://example.test'),env)).status,400);
+ assert.equal((await worker.fetch(req('/api/review',{},'https://other.test'),env)).status,403);
+ assert.equal((await worker.fetch(req('/api/review',{},'null'),env)).status,403);
+ assert.equal((await worker.fetch(req('/private',{}),env)).status,404);
+ assert.equal(served,1);
+});

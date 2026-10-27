@@ -32,10 +32,11 @@ async function forwarded(stub,path,payload,onProgress){
 }
 export default {
  async fetch(request,env){
-  const origin=request.headers.get('Origin'),allowed=origin===env.ALLOWED_ORIGIN;
+  const url=new URL(request.url),origin=request.headers.get('Origin'),allowed=origin===env.ALLOWED_ORIGIN||origin===url.origin;
   const cors=r=>{const h=new Headers(r.headers);if(allowed){h.set('Access-Control-Allow-Origin',origin);h.set('Vary','Origin');h.set('Access-Control-Allow-Methods','GET, POST, OPTIONS');h.set('Access-Control-Allow-Headers','Content-Type, X-Trial-Code');}return new Response(r.body,{status:r.status,headers:h});};
   try{
-   const path=new URL(request.url).pathname;
+   const path=url.pathname;
+   if(!path.startsWith('/api/'))return env.ASSETS&&['GET','HEAD'].includes(request.method)?env.ASSETS.fetch(request):json({error:'Not found'},404);
    if(request.method==='GET'&&path==='/api/health'){const budget=enabled(env)?await internal(env.BUDGET.getByName('global'),'/status',{}):{};return cors(json({ready:enabled(env),provider:'DeepSeek',requiresCode:!!env.TRIAL_ACCESS_CODE,...budget}));}
    if(!allowed)throw new AppError(403,'请从课程网页打开体验。');
    if(request.method==='OPTIONS')return cors(new Response(null,{status:204}));

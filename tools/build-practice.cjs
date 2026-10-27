@@ -13,7 +13,7 @@ const esbuild=require('../cloud/node_modules/esbuild');
 const meta=Object.fromEntries(Object.entries(box.window.PRACTICE_CONTENT).map(([k,c])=>[k,{title:c.title,subtitle:c.subtitle,status:c.status,skill:c.skill}]));
 let online=template.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+esbuild.transformSync(fs.readFileSync('practice/app.css','utf8'),{loader:'css',minify:true}).code+'</style>');
 for(const f of ['content','report-format','app','live'])online=online.replace(new RegExp('<script defer src="practice/'+f+'.js[^\\"]*"><\\/script>'),'');
-const startup='window.PRACTICE_META='+JSON.stringify(meta)+';\n'+['report-format','live','app'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
+const startup='window.PRACTICE_META='+JSON.stringify(meta)+';\n'+['report-format','live','app'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n')+'\n'+fs.readFileSync('tools/navigation-cache.js','utf8');
 online=online.replace('</body>','<script>'+esbuild.transformSync(startup,{loader:'js',minify:true,charset:'utf8',target:'es2020'}).code.replace(/<\/script/gi,'<\\/script')+'</script></body>');fs.writeFileSync('practice.html',online);
 let html=template;
 html=html.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+fs.readFileSync('practice/app.css','utf8')+'</style>');
