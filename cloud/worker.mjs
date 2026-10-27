@@ -1,3 +1,4 @@
+import {readEvents} from '../server/events.mjs';
 import {AppError, createCoach} from '../server/core.mjs';
 const TTL = 30 * 60 * 1000;
 const json = (body, status=200) => Response.json(body, {status, headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
@@ -15,6 +16,20 @@ async function internal(stub,path,body){const r=await stub.fetch('https://intern
 async function reserve(env,ip){return internal(env.BUDGET.getByName('global'),'/reserve',{ip});}
 async function ipHash(request){const ip=request.headers.get('CF-Connecting-IP')||'unknown';const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(new Date().toISOString().slice(0,10)+':'+ip));return [...new Uint8Array(bytes)].map(x=>x.toString(16).padStart(2,'0')).join('');}
 function randomId(){return [...crypto.getRandomValues(new Uint8Array(24))].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function streamResponse(work){
+ const encoder=new TextEncoder();let closed=false;
+ return new Response(new ReadableStream({async start(controller){
+  const send=packet=>{if(!closed)controller.enqueue(encoder.encode('data: '+JSON.stringify(packet)+'\n\n'));};
+  try{send({type:'progress',stage:'accepted'});const result=await work(p=>send({type:'progress',...p}));send({type:'result',data:result});}
+  catch(e){send({type:'error',error:e instanceof AppError?e.message:'服务暂时不可用，请稍后重试。'});}
+  finally{if(!closed){closed=true;controller.close();}}
+ },cancel(){closed=true;}}),{headers:{'Content-Type':'text/event-stream; charset=utf-8','Cache-Control':'no-store, no-transform','X-Content-Type-Options':'nosniff'}});
+}
+async function forwarded(stub,path,payload,onProgress){
+ const res=await stub.fetch('https://internal'+path,{method:'POST',headers:{'Content-Type':'application/json',Accept:'text/event-stream'},body:JSON.stringify(payload)});
+ if(!res.headers.get('content-type')?.includes('text/event-stream')){const d=await res.json();if(!res.ok)throw new AppError(res.status,d.error);return d;}
+ let result;await readEvents(res,p=>{if(p.type==='progress')onProgress(p);if(p.type==='result')result=p.data;if(p.type==='error')throw new AppError(503,p.error);});if(!result)throw new AppError(502,'连接中断，请重试。');return result;
+}
 export default {
  async fetch(request,env){
   const origin=request.headers.get('Origin'),allowed=origin===env.ALLOWED_ORIGIN;
@@ -30,17 +45,18 @@ export default {
    limit(env);
    if(env.TRIAL_ACCESS_CODE&&request.headers.get('X-Trial-Code')!==env.TRIAL_ACCESS_CODE)throw new AppError(401,'体验码不正确。');
    const body=await read(request);if(body?.consent!==true)throw new AppError(400,'请先确认将本次材料发送给 DeepSeek，并由 Cloudflare 处理。');
-   const ip=await ipHash(request);let result;
+   const ip=await ipHash(request);const execute=async onProgress=>{let result;
    if(path==='/api/review'){
-    const coach=createCoach({getKey:()=>env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL,cleanupTimer:false,reserve:()=>reserve(env,ip)});
+    const coach=createCoach({getKey:()=>env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL,cleanupTimer:false,onProgress,reserve:()=>reserve(env,ip)});
     result=await coach.review(body);
    }else{
     const id=path.endsWith('/start')?randomId():body.session;
     if(typeof id!=='string'||!/^\w{48}$/.test(id))throw new AppError(400,'无效的面试会话。');
-    result=await internal(env.INTERVIEWS.getByName(id),path,{body,ip});
+    result=onProgress?await forwarded(env.INTERVIEWS.getByName(id),path,{body,ip},onProgress):await internal(env.INTERVIEWS.getByName(id),path,{body,ip});
     if(path.endsWith('/start'))result.session=id;
    }
-   return cors(json(result));
+   return result;};
+   return cors(request.headers.get("Accept")?.includes("text/event-stream")?streamResponse(execute):json(await execute()));
   }catch(e){return cors(fail(e));}
  }
 };
@@ -66,19 +82,21 @@ export class InterviewSession {
  async fetch(request){
   if(this.busy)return json({error:'上一条回答仍在处理中，请等待。'},409);
   this.busy=true;
-  try{
+  const execute=async onProgress=>{try{
    const {body,ip}=await request.json(),path=new URL(request.url).pathname;
-   if(path.endsWith('/clear')){await this.ctx.storage.deleteAll();return json({cleared:true});}
+   if(path.endsWith('/clear')){await this.ctx.storage.deleteAll();return {cleared:true};}
    const saved=await this.ctx.storage.get('session');
    if(!path.endsWith('/start')&&(!saved||saved.expires<=Date.now()))throw new AppError(410,'面试会话已过期，请重新开始。');
-   const coach=createCoach({getKey:()=>this.env.DEEPSEEK_API_KEY,model:this.env.DEEPSEEK_MODEL,cleanupTimer:false,initialSessions:saved?.snapshot||[],reserve:()=>reserve(this.env,ip)});
+   const coach=createCoach({getKey:()=>this.env.DEEPSEEK_API_KEY,model:this.env.DEEPSEEK_MODEL,cleanupTimer:false,onProgress,initialSessions:saved?.snapshot||[],reserve:()=>reserve(this.env,ip)});
    const result=path.endsWith('/start')?await coach.start(body):await coach.answer({...body,session:saved.internalId});
    const snapshot=coach.snapshot(),expires=Date.now()+TTL;
    // Persist before returning, including successful request IDs for retry deduplication.
    await this.ctx.storage.put('session',{snapshot,internalId:saved?.internalId||result.session,expires});
    await this.ctx.storage.setAlarm(expires);
-   return json(result);
-  }catch(e){return fail(e);}finally{this.busy=false;}
+   return result;
+  }finally{this.busy=false;}};
+  if(request.headers.get("Accept")?.includes("text/event-stream"))return streamResponse(execute);
+  try{return json(await execute());}catch(e){return fail(e);}
  }
  async alarm(){const saved=await this.ctx.storage.get('session');if(saved&&saved.expires>Date.now()){await this.ctx.storage.setAlarm(saved.expires);return;}await this.ctx.storage.deleteAll();}
 }

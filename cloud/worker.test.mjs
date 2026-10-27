@@ -48,3 +48,11 @@ test('interview persists through each actor restart, retry is cached, clear eras
 test('expired interview storage is erased by alarm',async()=>{
  const ctx=context();await ctx.storage.put('session',{expires:Date.now()-1,snapshot:[]});await new InterviewSession(ctx,base).alarm();assert.equal(ctx.storage.map.size,0);
 });
+test('streaming interview forwards progress and persists before final external session ID',async()=>{
+ const old=globalThis.fetch;globalThis.fetch=async()=>new Response('data: '+JSON.stringify({choices:[{delta:{content:JSON.stringify({question:'你如何检查角色一致性？',focus:'质检'})},finish_reason:'stop'}]})+'\n\ndata: [DONE]\n\n');
+ try{const budget=new TrialBudget(context(),base),contexts=new Map(),env={...base,BUDGET:{getByName:()=>({fetch:(u,i)=>budget.fetch(new Request(u,i))})}};env.INTERVIEWS={getByName:id=>{if(!contexts.has(id))contexts.set(id,context());return {fetch:(u,i)=>new InterviewSession(contexts.get(id),env).fetch(new Request(u,i))};}};
+ const r=req('/api/interview/start',{consent:true,role:'AIGC 创作设计岗位',project:'我负责一个虚构运动品牌的分镜、人物一致性检查和素材生成。项目只做了内部演示，没有投放数据。'});r.headers.set('Accept','text/event-stream');
+ const response=await worker.fetch(r,env);assert(response.headers.get('content-type').includes('text/event-stream'));
+ const packets=[];const {readEvents}=await import('../server/events.mjs');await readEvents(response,p=>packets.push(p));assert(packets.some(p=>p.stage==='generating'));const result=packets.at(-1);assert.equal(result.type,'result');assert.match(result.data.session,/^\w{48}$/);assert(await contexts.get(result.data.session).storage.get('session'));
+ }finally{globalThis.fetch=old;}
+});

@@ -1,3 +1,4 @@
+import {readEvents} from './events.mjs';
 import crypto from 'node:crypto';
 export class AppError extends Error { constructor(status, message){super(message);this.status=status;} }
 const bad = msg => {throw new AppError(400,msg)};
@@ -11,17 +12,21 @@ export function validateResult(kind,r,source){
  if(!Array.isArray(r.strengths)||r.strengths.length>4||r.strengths.some(s=>!str(s,600))||!str(r.nextPractice,1200))throw new Error('format');
  return {summary:r.summary,issues,strengths:r.strengths,nextPractice:r.nextPractice};
 }
-export function createCoach({getKey,model='deepseek-flash',fetcher=fetch,reserve,initialSessions=[],cleanupTimer=true}){
+export function createCoach({getKey,model='deepseek-flash',fetcher=fetch,reserve,initialSessions=[],cleanupTimer=true,onProgress}){
  const sessions=new Map(initialSessions.map(([id,s])=>[id,{...s,busy:false,cache:new Map(s.cache)}]));
  if(cleanupTimer){const cleanup=setInterval(()=>{for(const [id,s] of sessions)if(s.expires<Date.now())sessions.delete(id);},60000);cleanup.unref();}
  async function ask(mode,system,input,source=''){
   if(!getKey())throw new AppError(503,'服务尚未配置 DeepSeek 密钥，请联系课程提供者。');
   await reserve();
+  onProgress?.({stage:"model_started"});
   const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),65000);
   try {
-   const res=await fetcher('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${getKey()}`},signal:ctl.signal,body:JSON.stringify({model,thinking:{type:'disabled'},stream:false,temperature:.3,max_tokens:mode==='question'?700:2600,response_format:{type:'json_object'},messages:[{role:'system',content:system},{role:'user',content:JSON.stringify(input)}]})});
+   const res=await fetcher('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${getKey()}`},signal:ctl.signal,body:JSON.stringify({model,thinking:{type:'disabled'},stream:!!onProgress,temperature:.3,max_tokens:mode==='question'?700:2600,response_format:{type:'json_object'},messages:[{role:'system',content:system},{role:'user',content:JSON.stringify(input)}]})});
    if(!res.ok){await res.body?.cancel();throw new AppError(res.status===429?429:502,res.status===429?'模型服务繁忙，请稍后重试。':res.status===401?'服务端模型凭证无效，请联系课程提供者。':res.status===402?'模型账户余额不足，请联系课程提供者。':'模型服务暂时不可用，请稍后重试。');}
-   const body=await res.json(),choice=body.choices?.[0];
+   let choice;
+   if(onProgress){let content='',finish=null,last=0;await readEvents(res,packet=>{const c=packet.choices?.[0];if(!c)return;content+=c.delta?.content||'';finish=c.finish_reason||finish;if(content.length&&Date.now()-last>180){onProgress({stage:'generating',characters:content.length});last=Date.now();}});choice={message:{content},finish_reason:finish};if(!finish)throw new Error('incomplete stream');}
+   else {const body=await res.json();choice=body.choices?.[0];}
+   onProgress?.({stage:'checking'});
    if(choice?.finish_reason==='length')throw new AppError(502,'反馈生成不完整。你的输入已保留，请稍后重试。');
    let result;try{result=validateResult(mode,JSON.parse(choice?.message?.content||''),source);}catch{throw new AppError(502,'模型反馈未通过格式或原文引用检查，请重试；本次不展示不可靠批注。');}
    return {...result,provider:'DeepSeek',model,generatedAt:new Date().toISOString()};

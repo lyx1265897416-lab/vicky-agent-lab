@@ -9,10 +9,12 @@ for(const [kind,course] of Object.entries(box.window.PRACTICE_CONTENT))for(const
 for(const skill of ['aigc-interview-coach','ielts-writing-coach'])fs.copyFileSync(path.join(w,'resources/report-format.md'),path.join(w,'.agents/skills',skill,'references/report-format.md'));
 const base='https://lyx1265897416-lab.github.io/vicky-agent-lab/';
 const template=fs.readFileSync('tools/practice-page.html','utf8');
-let online=template.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+fs.readFileSync('practice/app.css','utf8')+'</style>');
+const esbuild=require('../cloud/node_modules/esbuild');
+const meta=Object.fromEntries(Object.entries(box.window.PRACTICE_CONTENT).map(([k,c])=>[k,{title:c.title,subtitle:c.subtitle,status:c.status,skill:c.skill}]));
+let online=template.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+esbuild.transformSync(fs.readFileSync('practice/app.css','utf8'),{loader:'css',minify:true}).code+'</style>');
 for(const f of ['content','report-format','app','live'])online=online.replace(new RegExp('<script defer src="practice/'+f+'.js[^\\"]*"><\\/script>'),'');
-const startup=['content','report-format','app','live'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
-online=online.replace('</body>','<script>'+startup+'</script></body>');fs.writeFileSync('practice.html',online);
+const startup='window.PRACTICE_META='+JSON.stringify(meta)+';\n'+['report-format','live','app'].map(f=>fs.readFileSync('practice/'+f+'.js','utf8').replace(/<\/script/gi,'<\\/script')).join('\n');
+online=online.replace('</body>','<script>'+esbuild.transformSync(startup,{loader:'js',minify:true,charset:'utf8',target:'es2020'}).code.replace(/<\/script/gi,'<\\/script')+'</script></body>');fs.writeFileSync('practice.html',online);
 let html=template;
 html=html.replace(/<link rel="stylesheet"[^>]+>/,'<style>'+fs.readFileSync('practice/app.css','utf8')+'</style>');
 for(const f of ['content','report-format','app','live'])html=html.replace(new RegExp('<script defer src="practice/'+f+'.js[^\"]*"><\/script>'),'<script defer src="practice/'+f+'.js"></script>');
