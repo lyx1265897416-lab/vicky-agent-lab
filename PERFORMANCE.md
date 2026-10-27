@@ -72,3 +72,6 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 ### 首轮线上反馈与修正
 首次线上冷加载观测到 LCP 9836 ms、DOM ready 13291 ms、CLS 0.1356，未出现长任务。多个小资源在当前网络分别等待 3.4—7 秒，造成额外串行初始化延迟。
 已把新案例页 CSS、课程数据、校验器与交互脚本内联到单个约 64.6 KB 的 HTML（gzip 后更小）；视频仍按需请求。`tools/practice-page.html` 为页面模板，`tools/build-practice.cjs` 生成线上页与离线版。本地交互与无溢出复验通过。
+
+### 内联后线上复测
+相同设备和网络下，带新版本查询参数的线上观测：LCP 1120 ms、DOM ready 1273 ms、load 1279 ms、长任务 0；只有一个 opt-in 性能诊断脚本请求，无外域与视频请求。发现 CLS 0.1356，追加为动态标题、说明与案例主体预留高度，避免流式 HTML 在脚本执行前后跳动。该观测仅代表本次网络；不是全球或国内速度保证。
