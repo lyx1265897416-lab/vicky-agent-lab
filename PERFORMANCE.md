@@ -179,3 +179,5 @@ Release evidence: Worker `5a647587-c68e-47ca-8c41-6b7e5d567673`; GitHub Pages co
 - 尝试 ITDOG 国内多线路测速；用户授权本次滑块验证，但验证未通过，没有获取国内节点数据。用户暂无域名，因此未开通自有域名、付费托管或中国大陆 CDN。
 - 官方说明：https://developers.cloudflare.com/china-network/ ：大陆网络是 Enterprise 的另订服务，默认免费网络不能据此宣称大陆加速。静态缓存依据 https://developers.cloudflare.com/workers/static-assets/ 。
 - 最终 Worker 版本 f12ef0c2-c6e8-4f29-9f45-6d412a5b1a30。公共课程按允许清单上传，server/cloud/env/Git 元数据不进入静态目录。
+
+最终缓存更新验证：再次打开已取得新版 HTML（诊断脚本在 load 后加载），LCP 192ms、TTFB 34ms、DOM ready 101ms、load 102ms、HTML transfer 0、servedByServiceWorker=true、CLS 0、0 长任务。health 2252ms 独立联网，界面先显示。验证了后台更新在下一次打开生效，不会在填写中强制刷新。curl 确认 /server/core.mjs 为404、health仍剩余0；Python默认User-Agent请求被边缘策略返回403，该客户端结果未当作浏览器可用性证据。
