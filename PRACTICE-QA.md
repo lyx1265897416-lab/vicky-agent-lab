@@ -73,3 +73,21 @@
 - Incremental public-answer fields are provisional, not final truth. Final exact-quote/schema checks are unchanged. Failed or stopped previews are removed; no draft download or early answer submission is exposed.
 - Browser checks: desktop and 390px mobile, guidance remains, safe literal rendering of HTML-like model text, cancellation/error recovery, no overflow or console error.
 - Automated checks: 16 pass. Parser is tested at every character prefix, with Chinese, quotes, newline escapes and emoji; unknown/internal fields excluded. Generated files and offline package rebuilt.
+
+## 2026-10-27 · v1.21 从首次进入到完成练习
+
+### 实际发现与修正
+- 额度耗尽但入口仍显示可提交：健康检查读取每日共享余额，不消耗额度；作文不足 1 次、完整新面试不足 5 次时提前提示。已有会话仍保留回答/下载入口。余额为瞬时状态，不承诺预留。
+- 聊天框重绘可能停在旧题：突出当前问题与考察点，历史问答默认折叠，四题进度可见；完整新题后自动定位。
+- 第四题仍提示继续追问：按钮改为“提交最后一题，生成复盘”，等待区区分问题生成和最终报告。生成时输入只读，避免生成途中修改后被覆盖。
+- 报告过长且缺少下一步：原文可展开、批注可定位、练习框与完整 Markdown 导出；重开前可保留/确认，防止误清空。刷新/离开有未保存内容提示。
+- 模型没有列出修改点时仍提示点批注：单独处理空 issues，显示优点和迁移练习，不鼓励重复付费请求。
+- 本轮真实作文出现格式或原文引用校验拒绝：保留输入、撤回预览，未把失败报告当成功。增加独立批注处理：仅部分引用不匹配时隐藏这些批注并显示说明；所有引用不匹配或格式错误仍拒绝。不会修改原句去迁就模型，不自动重试。
+
+### 实测证据与边界
+- 公开 DeepSeek 面试：首问→回答→第 2/3/4 题→最后回答→复盘全部成功；问题依次涉及角色参考、检查表、验收边界、下次改进，最终反馈正确把计划与已验证事实区分。4 轮历史可展开，练习与完整报告导出已检查文件内容。
+- 公开作文：270 词原创稿（含两处故意语法错误），1 次真实请求被校验拦截，输入保留。这次未记录原始模型输出，不能断言具体哪个字段导致失败。新增处理已用本地同一 core/stream 路径验证，但不能把模拟成功当成真实作文复测成功。
+- 本地免费模拟：完整 4 轮、最后一题、报告与练习、重开确认、无批注分支、部分错误引用过滤与告知、报告下载均通过。模拟材料明确标为测试。
+- 自动检查 18 项通过（包括持久会话/幂等重试/总额限制/引用校验/流式预览），原课程与素材一致性检查通过，语法及 diff 检查通过。
+- 本轮已获准的 6 次调用均已使用（面试 5 次，作文 1 次）；测试结束先恢复每日 30 次上限。额外最多 2 次真实作文复测正在等待用户授权，尚未执行。
+- 截图：工作区 outputs/interview-round4-v121.png 为公开网站真实第 4 题。

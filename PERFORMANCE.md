@@ -138,3 +138,11 @@ Release evidence: Worker `5a647587-c68e-47ca-8c41-6b7e5d567673`; GitHub Pages co
 - Local browser fault tests: draft HTML-like text remained literal (zero injected image nodes), stopping retracted draft, error retracted draft, original input retained. Mobile scrollWidth=viewportWidth=390, no new console errors on public or local checks. Desktop final report screenshot inspected.
 - Sixteen backend/parser tests passed, including every-prefix decoding, allowlisting, invalid-quote rejection after preview, chunked SSE and persistent session forwarding. All existing performance guards and original 8 lessons /121 asset bodies passed. Timing observations describe this network only.
 - Code published as fd96328; GitHub Pages run40485226886 succeeded. Worker c85f0dea-d3b7-46a2-9d84-1aac7c58c596. Public footer v1.20 verified.
+
+## 2026-10-27 · v1.21 新用户完整旅程
+
+- 实际公开页面：四轮面试首问 2.0 秒，后续追问 4.2 / 1.8 / 1.4 秒，最后复盘 4.9 秒。使用原创虚构舞蹈招新项目，未发送用户个人资料。
+- 公开面试页：TTFB 825 ms、HTML 下载 299 ms、DOM ready 1155 ms、load 1158 ms、HTML transfer 27593 B。诊断中的 LCP 8376 ms 包含跳到体验区后的动态内容，不能当作初始首屏速度。
+- 公开作文页：TTFB 357 ms、HTML 下载 108 ms、DOM ready 524 ms、LCP 544 ms。load 3603 ms 受可选 perf-observer.js（3178 ms）影响；健康检查 4566 ms 是另一个较慢网络请求，填写表单不依赖它完成。此页实际观察视口 1280 px，不冒称手机加载数据。
+- 两页均 0 个长任务，控制台无 error/warn；未新增首屏视频或大图片。新 practice shell 79988 B（未压缩），仍低于既有 80000 B 限额。原课程 8 节、121 个资源体保持一致。
+- 390 × 844 检查了真实面试第 4 题和本地报告阅读/练习；无水平溢出。桌面检查了当前题、历史折叠、复盘与重开确认。并未做中国大陆或全网络延迟验证。
