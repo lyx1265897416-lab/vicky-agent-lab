@@ -481,7 +481,7 @@ render();tab(location.hash.slice(1),false);
 'use strict';
 (()=>{
 // Set only to the verified HTTPS origin of the deployed backend. Never put a model key here.
-const HOSTED_API='';
+const HOSTED_API='https://vicky-agent-lab-api.vicky-agent-lab-api.workers.dev';
 const api=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin:HOSTED_API;
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let kind=new URLSearchParams(location.search).get('case')==='ielts'?'ielts':'interview',ready=false,requiresCode=false,loading=false,controller=null;

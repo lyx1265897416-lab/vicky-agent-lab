@@ -59,7 +59,7 @@ npm run dev
 
 准备完成：服务端密钥、结构化反馈、原句校验、四轮追问、会话持久化/过期、全站额度、CORS、请求大小限制。
 已完成：OAuth 授权、首次部署，云端 /api/health 返回 HTTP 200。
-待完成：Secret 填写、真实模型测试、填写前端地址、发布和公网性能检查。
+已完成：Secret 由账号本人填写；两条真实模型 API 流程已通过首轮验证。前端地址已配置，正在进行发布后浏览器验收。
 接口地址：https://vicky-agent-lab-api.vicky-agent-lab-api.workers.dev
 大陆用户的 GitHub Pages / workers.dev 连通性需在目标网络独立实测。若受限，后续考虑自有域名或国内托管，不能用本机测试声称国内稳定。
 
