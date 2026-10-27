@@ -67,3 +67,9 @@
 - Public UI: actual own-input IELTS output and actual interview first question. Mobile and desktop layouts inspected, no overflow/errors. Local fault fixture checks reconnect, cancellation and error with draft retention; fixture is outside the published repository and has no key.
 - Lazy course loading verified through “跟着搭建”; complete lesson remains readable. Initial real-AI tab doesn't load content.js or video. Loading course controls are inert until ready, with a retryable message on failure.
 - Cancel means stop waiting; it cannot guarantee upstream cancellation or refund. No automatic paid retries were added. Current-page draft retention does not promise refresh persistence.
+
+## v1.20 · actual answer previews
+- Real public IELTS input → partial summary visible → validated report, 7.3s. Real public interview input → final first question, 3.0s. Controlled slow local stream additionally verifies readable partial question and report fields without relying on screenshot timing.
+- Incremental public-answer fields are provisional, not final truth. Final exact-quote/schema checks are unchanged. Failed or stopped previews are removed; no draft download or early answer submission is exposed.
+- Browser checks: desktop and 390px mobile, guidance remains, safe literal rendering of HTML-like model text, cancellation/error recovery, no overflow or console error.
+- Automated checks: 16 pass. Parser is tested at every character prefix, with Chinese, quotes, newline escapes and emoji; unknown/internal fields excluded. Generated files and offline package rebuilt.
