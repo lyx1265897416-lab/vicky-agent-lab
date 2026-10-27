@@ -60,3 +60,10 @@
 - 手机 390 px / 350 px 无横向溢出；桌面面试报告为双栏，无文字重叠；控制台无错误。
 - 连接检查进行中时文案改为“正在连接体验服务”，避免误报尚未开放。
 - 实测结果仅存在工作目录与本次浏览器中；未把用户资料作为公开课程样例。
+
+## v1.19.1 · streaming and startup verification (2026-10-27)
+- Thirteen automated tests cover existing budgets/session durability plus UTF-8/SSE chunk boundaries, streamed progress, truncated provider response rejection, external interview session forwarding, and persistence before final result.
+- Real DeepSeek: IELTS report, all four interview rounds, final report (one validation failure then explicit retry), session clear. Validation failure is surfaced rather than substituted with sample feedback.
+- Public UI: actual own-input IELTS output and actual interview first question. Mobile and desktop layouts inspected, no overflow/errors. Local fault fixture checks reconnect, cancellation and error with draft retention; fixture is outside the published repository and has no key.
+- Lazy course loading verified through “跟着搭建”; complete lesson remains readable. Initial real-AI tab doesn't load content.js or video. Loading course controls are inert until ready, with a retryable message on failure.
+- Cancel means stop waiting; it cannot guarantee upstream cancellation or refund. No automatic paid retries were added. Current-page draft retention does not promise refresh persistence.

@@ -106,3 +106,21 @@ Public verification after Pages run 40441264176 succeeded (commit 6e110bd): setu
 - 公开面试页：LCP 2236 ms、DOMContentLoaded 4794 ms、load 4796 ms、CLS 0.0154、long tasks 0；health 2015 ms。
 - 新增后台 health 请求不调用模型，提交前无媒体自动加载；静态实践页面 98,826 B，原 8 课与 121 资产正文保持一致。
 - 两页均可真实提交，不存在渲染卡死；不能将 4.8–7.4 秒的本次加载时间说成全球或国内稳定。网页与 health 受外部网络影响，仍保留超时与明确错误提示。
+
+## 2026-10-27 · v1.19 / v1.19.1 live waiting and startup
+
+- Online practice HTML: 98,826 → 70,296 bytes (29% smaller before HTTP compression). The full 32,788-byte case/lesson dataset now loads only when opening a lesson, complete example, or own-practice tab. Online startup JS/CSS is minified; the downloadable workspace retains readable sources and all lessons. Build requires `npm ci --prefix cloud` for the pinned esbuild dependency.
+- Cloudflare backend uses DeepSeek streaming. SSE lifecycle events arrive before the final result: received → model reading → actual generated character count → reference/format validation. No invented completion percentage or unvalidated report is displayed. JSON clients remain supported.
+- Waiting UI appears synchronously, shows elapsed time, relevant reading/preparation guidance, and stop controls. Mobile scrolls to waiting feedback, then to the next interview question. Connection retry and request errors preserve current-page inputs; refreshing still clears drafts, as disclosed.
+- Public browser measurements for v1.19 (same machine/network, individual observations, not a controlled benchmark):
+
+| Page | LCP | DOM ready | HTML TTFB | HTML transfer | Health | Long tasks | CLS |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| IELTS desktop, 1365px | 2,944ms | 3,066ms | 2,766ms | 24,284B | 775ms | 0 | .0087 |
+| Interview, checked at 390px | 748ms | 729ms | 544ms | 24,284B | 1,556ms | 0 | .0154 |
+
+Previous observations: IELTS LCP 6,148ms / DOM 7,402ms; interview LCP 2,236ms / DOM 4,794ms. Network variability remains significant; most IELTS first-visit latency was upstream HTML TTFB. These observations do not establish mainland-China or global speed. Initial resource reports contained only opt-in diagnostics and health, no video, full lesson payload, or model request.
+
+- Real cloud SSE test: essay accepted at 1,813ms, first generation progress 2,877ms, final 9,100ms. Interview start: 728 / 2,069 / 2,495ms; follow-ups: accepted 205–249ms, first generation 1,020–1,242ms, final 1,318–1,675ms. Final interview report first attempt failed exact-reference/format validation; no invalid report was shown. Explicit retry completed at 6,455ms (accepted 657ms, generation 1,529ms), then session cleared. No automatic paid retry.
+- Public browser real calls: different IELTS test essay completed in 5.3s; interview first question in 2.8s. These are full completion times, not first-token latency. Generated text remains subject to model quality limits.
+- Desktop/mobile screenshots inspected; 390px viewport equals document scrollWidth, no horizontal overflow. Console errors/warnings absent. Mobile reconnection, preserved input, stop and injected SSE error tested locally without paid model calls. Functional and stream tests: 13 pass; six cases/eight practice lessons retained; original eight foundation lessons /121 asset bodies unchanged.
