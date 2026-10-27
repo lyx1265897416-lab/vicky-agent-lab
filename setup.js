@@ -6,6 +6,6 @@ all('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const t=docum
 function update(){const boxes=all('[data-setup-check]');const n=boxes.filter(x=>x.checked).length;q('#setup-progress').textContent=n+' / '+boxes.length+' 项自查完成'+(n===boxes.length?' · 可以继续第 1 课；第 2 课还有独立读写练习。':' · 对照真实结果勾选，不是自动检测。');}
 all('[data-setup-check]').forEach(b=>{b.checked=!!saved[b.dataset.setupCheck];b.addEventListener('change',()=>{saved[b.dataset.setupCheck]=b.checked;try{localStorage.setItem('vicky-setup-v1.2',JSON.stringify(saved))}catch{}update()})});update();})();
 // Restore a deep link after the platform panel becomes visible.
-function restoreSetupAnchor(){const target=document.getElementById(location.hash.slice(1));if(target)target.scrollIntoView({block:'start',behavior:'instant'});}
+function restoreSetupAnchor(){const target=document.getElementById(location.hash.slice(1));if(target){let parent=target;while(parent){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement}target.scrollIntoView({block:'start',behavior:'instant'});}}
 requestAnimationFrame(restoreSetupAnchor);
 window.addEventListener('hashchange',()=>requestAnimationFrame(restoreSetupAnchor));

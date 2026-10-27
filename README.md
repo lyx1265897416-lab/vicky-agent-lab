@@ -87,3 +87,7 @@ GitHub Pages 从 `main` 分支的仓库根目录发布。提交并推送更新�
 `course-content.js` 仍是课程/资料的规范来源。编辑后运行 `node tools/split-course.cjs`，再运行 `node tools/build-critical.cjs` 和 `node tools/check-performance.cjs`。不要手改生成的 `course-data/` 文件。下载包的正文与内容没有更改。
 
 具体优化、实测数据与限制见 [PERFORMANCE.md](PERFORMANCE.md)。用户要求每次网页交付都检查性能，已记录在 [AGENTS.md](AGENTS.md)。本版保留了真实图像、视频与体验入口；优化没有替换成示意图。
+
+### v1.15 — 账号注册与中国大陆可用性
+
+安装页增加共享注册教程，在两条系统路线的登录前加入 02A 入口。包含地区判断、五步注册、手机验证真实官方截图、六类排错与账号/Codex/文件操作三层验收。来源与验证边界见 `REGISTRATION-RESEARCH.md`。注册清单在资料页与所有课程包中同步提供；原有步骤锚点保持可用。大陆网络、新账号注册与 Windows 原生流程未实测。

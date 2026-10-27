@@ -47,3 +47,11 @@ The initial v1.14 public check had LCP 5,956 ms, DOM ready 6,406 ms, CLS 0, no l
 Public code commit `160306a`, GitHub Pages run `40318644272` succeeded. Actual desktop-browser observation on `index.html?v=1.14&rev=160306a&perf=1`: LCP 3,708 ms, CLS 0.018, no long tasks, no third-party requests, all seven visible/nearby images loaded. DOM ready was 8,414 ms; first visibility improved, but this network/host still had document-loading delay. The final 7 subresource entries total 145,479 encoded bytes, **excluding** the HTML document (critical CSS, hero and startup JS are now inline); do not compare that number directly with the older subresource-only total as if it were total transfer size.
 
 The public OpenResume clip reached readyState 4 and the end at 15.6 s. Scrolling away left zero players. No browser console errors were observed. These are individual runs with differing cache/connection state; no guarantee of worldwide or mainland-China latency is made. Subsequent deliveries must repeat the public check rather than relying on these results.
+
+## Registration onboarding v1.15 — 2026-10-26
+
+- Added shared account eligibility/registration guide before OS installation and a 02A entry immediately before both login steps. Long detail uses native disclosure panels, opened by deep links. No new dependency/framework.
+- Local setup.html?perf=1#registration observation: LCP 176 ms, CLS 0, 1 long task (64 ms), DOM ready 98 ms, load 143 ms; 9 subresource requests, 138,311 encoded bytes excluding the HTML document, 0 external requests. This is a local-machine result, not public or China-network latency. Lazy collapsed/offscreen images correctly remain unloaded.
+- Real phone verification reference is 14,554 bytes, intrinsic 904×504, local WebP with lazy loading. Desktop right-side image and single-column mobile layout checked. 390 px test iframe yields 375 px content after scrollbar; no horizontal overflow at entry and expanded phone section.
+- Registration route expansion, Windows panel switch, return to phone branch, new material selection, no new console errors verified. Original 8 lessons and 121 asset bodies match generated payloads. ZIP checks passed including all registration-guide copies. Local links and fragment IDs resolve.
+- No new-account creation, phone verification, mainland-network or Windows native app test is claimed.
