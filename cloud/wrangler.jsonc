@@ -10,7 +10,7 @@
     "ALLOWED_ORIGIN": "https://lyx1265897416-lab.github.io",
     "DEEPSEEK_MODEL": "deepseek-flash",
     "DAILY_CALL_LIMIT": "30",
-    "PUBLIC_TRIAL": "false"
+    "PUBLIC_TRIAL": "true"
   },
   "durable_objects": {"bindings": [
     {"name": "BUDGET", "class_name": "TrialBudget"},

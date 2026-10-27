@@ -24,9 +24,9 @@ npm run login
 npm run deploy
 ```
 
-Wrangler 登录会打开 Cloudflare OAuth 授权页，请账号本人确认权限。默认 `PUBLIC_TRIAL=false`，初次部署不会开放收费调用。
+Wrangler 登录会打开 Cloudflare OAuth 授权页，请账号本人确认权限。当前部署配置 `PUBLIC_TRIAL=true`，但缺少 DEEPSEEK_API_KEY 时仍关闭调用。保存有效密钥后，匿名试用将在每日额度内启用。新建其他环境时先设为 false，完成密钥配置再开启。
 
-在官方控制台填写 Secret 后，将 wrangler.jsonc 中 PUBLIC_TRIAL 改为 true，再运行 npm run deploy。以原创测试材料从已允许的课程来源进行雅思批改、完整 4 轮面试验证（总计至少 6 次模型调用）。模型/余额/输出格式错误时先修复，不要宣称服务已接通。
+在官方控制台填写 Secret 并部署后，检查 /api/health；修改源码配置时再运行 npm run deploy。以原创测试材料从已允许的课程来源进行雅思批改、完整 4 轮面试验证（总计至少 6 次模型调用）。模型/余额/输出格式错误时先修复，不要宣称服务已接通。
 
 只有实测通过后，在 practice/live.js 的 HOSTED_API 填写部署返回的 **实际 HTTPS origin**，运行 node tools/build-practice.cjs，检查手机/桌面布局和加载性能，再发布 GitHub Pages。网页只保存接口地址，不保存密钥。
 
@@ -58,7 +58,9 @@ npm run dev
 ## 覆盖范围与待办
 
 准备完成：服务端密钥、结构化反馈、原句校验、四轮追问、会话持久化/过期、全站额度、CORS、请求大小限制。
-待账号就绪后：OAuth 授权、首次部署、Secret 填写、真实模型测试、填写前端地址、发布和公网性能检查。
+已完成：OAuth 授权、首次部署，云端 /api/health 返回 HTTP 200。
+待完成：Secret 填写、真实模型测试、填写前端地址、发布和公网性能检查。
+接口地址：https://vicky-agent-lab-api.vicky-agent-lab-api.workers.dev
 大陆用户的 GitHub Pages / workers.dev 连通性需在目标网络独立实测。若受限，后续考虑自有域名或国内托管，不能用本机测试声称国内稳定。
 
 官方依据（核对 2026-10-27）：
