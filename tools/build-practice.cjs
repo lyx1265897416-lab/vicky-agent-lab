@@ -23,14 +23,16 @@ fs.mkdirSync(path.join(w,'practice/media'),{recursive:true});
 for(const f of ['content.js','report-format.js','app.js'])fs.writeFileSync(path.join(w,'practice',f),fs.readFileSync('practice/'+f,'utf8').replaceAll('downloads/practice-workspace/','').replaceAll('href="downloads/practical-','href="'+base+'downloads/practical-'));
 for(const f of fs.readdirSync('practice/media'))if(/\.(webp|mp4)$/.test(f))fs.copyFileSync('practice/media/'+f,path.join(w,'practice/media',f));
 cp.execFileSync('python3',['-c',`from pathlib import Path
-from zipfile import ZipFile,ZIP_DEFLATED
+from zipfile import ZipFile,ZIP_DEFLATED,ZipInfo
 w=Path('downloads/practice-workspace')
+def add(z,name,data):
+ i=ZipInfo(name,(2026,10,27,0,0,0));i.compress_type=ZIP_DEFLATED;z.writestr(i,data)
 with ZipFile('downloads/practical-cases-v1.zip','w',ZIP_DEFLATED) as z:
- z.writestr('practice-workspace/outputs/','')
+ add(z,'practice-workspace/outputs/','')
  for p in sorted(w.rglob('*')):
-  if p.is_file():z.write(p,'practice-workspace/'+str(p.relative_to(w)))
+  if p.is_file():add(z,'practice-workspace/'+str(p.relative_to(w)),p.read_bytes())
 with ZipFile('downloads/practical-skills-v1.zip','w',ZIP_DEFLATED) as z:
  for p in sorted((w/'.agents/skills').rglob('*')):
-  if p.is_file():z.write(p,str(p.relative_to(w)))
+  if p.is_file():add(z,str(p.relative_to(w)),p.read_bytes())
 `]);
 console.log('Built offline viewer, lessons and two ZIPs.');
